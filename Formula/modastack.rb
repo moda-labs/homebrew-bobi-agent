@@ -11,7 +11,7 @@ class Modastack < Formula
 
   def install
     virtualenv_create(libexec, "python3.13")
-    system libexec/"bin/pip", "install", buildpath
+    system libexec/"bin/pip", "install", "modastack==#{version}"
   end
 
   test do
