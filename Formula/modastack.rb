@@ -6,6 +6,7 @@ class Modastack < Formula
   url "https://files.pythonhosted.org/packages/cc/2b/05cba392701571bdd8baa91e74703a027383285f9616a265d99bbb03ba39/modastack-0.5.0.tar.gz"
   sha256 "f709734131732d4d8f675fa5275bbeadd636a59e2b26efba530a9f171b380af5"
   license "MIT"
+  revision 1
 
   depends_on "python@3.13"
 
