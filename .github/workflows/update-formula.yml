@@ -1,0 +1,52 @@
+name: Update Homebrew formula
+
+on:
+  repository_dispatch:
+    types: [pypi-release]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "PyPI version to update to (e.g. 0.3.0)"
+        required: true
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Get latest version from PyPI
+        id: pypi
+        run: |
+          VERSION="${{ github.event.inputs.version }}"
+          if [ -z "$VERSION" ]; then
+            VERSION="${{ github.event.client_payload.version }}"
+          fi
+          if [ -z "$VERSION" ]; then
+            VERSION=$(pip index versions modastack 2>/dev/null | head -1 | sed 's/.*(\(.*\))/\1/')
+          fi
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+          URL="https://files.pythonhosted.org/packages/source/m/modastack/modastack-${VERSION}.tar.gz"
+          SHA=$(curl -sL "$URL" | sha256sum | cut -d' ' -f1)
+          echo "sha256=$SHA" >> "$GITHUB_OUTPUT"
+          echo "url=$URL" >> "$GITHUB_OUTPUT"
+
+      - name: Update formula
+        run: |
+          sed -i "s|url \".*\"|url \"${{ steps.pypi.outputs.url }}\"|" Formula/modastack.rb
+          sed -i "s|sha256 \".*\"|sha256 \"${{ steps.pypi.outputs.sha256 }}\"|" Formula/modastack.rb
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add Formula/modastack.rb
+          git diff --staged --quiet || git commit -m "modastack ${{ steps.pypi.outputs.version }}"
+          git push
