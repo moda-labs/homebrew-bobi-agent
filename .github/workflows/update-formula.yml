@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: "PyPI version to update to (e.g. 0.3.0)"
+        description: "PyPI version to update to (e.g. 0.5.0)"
         required: true
 
 jobs:
@@ -14,6 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      pull-requests: write
     steps:
       - uses: actions/checkout@v4
 
@@ -46,12 +47,28 @@ jobs:
       - name: Update formula
         run: |
           sed -i "s|url \".*\"|url \"${{ steps.pypi.outputs.url }}\"|" Formula/modastack.rb
-          sed -i "s|sha256 \".*\"|sha256 \"${{ steps.pypi.outputs.sha256 }}\"|" Formula/modastack.rb
+          # Update only the source sha256 (first occurrence, before any bottle block)
+          sed -i '0,/sha256 ".*"/{s|sha256 ".*"|sha256 "${{ steps.pypi.outputs.sha256 }}"|;}' Formula/modastack.rb
+          # Remove old bottle block — new bottles will be built by test-bot
+          sed -i '/^  bottle do$/,/^  end$/d' Formula/modastack.rb
 
-      - name: Commit and push
+      - name: Create pull request
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          VERSION="${{ steps.pypi.outputs.version }}"
+          BRANCH="update-modastack-${VERSION}"
+
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$BRANCH"
           git add Formula/modastack.rb
-          git diff --staged --quiet || git commit -m "modastack ${{ steps.pypi.outputs.version }}"
-          git push
+          git diff --staged --quiet && { echo "No changes"; exit 0; }
+          git commit -m "modastack ${VERSION}"
+          git push -u origin "$BRANCH"
+
+          gh pr create \
+            --title "modastack ${VERSION}" \
+            --body "Update modastack to ${VERSION}. Bottles will be built by test-bot." \
+            --base main \
+            --head "$BRANCH"
