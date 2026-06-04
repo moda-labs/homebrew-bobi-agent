@@ -1,42 +1,61 @@
-name: brew pr-pull
+name: Publish bottles
 
 on:
-  pull_request_target:
-    types:
-      - labeled
+  workflow_run:
+    workflows: ["Build bottles"]
+    types: [completed]
 
 jobs:
-  pr-pull:
-    if: contains(github.event.pull_request.labels.*.name, 'pr-pull')
+  publish:
+    if: github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     permissions:
-      actions: read
-      checks: read
       contents: write
-      issues: read
-      pull-requests: write
     steps:
-      - name: Set up Homebrew
-        uses: Homebrew/actions/setup-homebrew@main
+      - uses: actions/checkout@v4
+
+      - name: Download all bottle artifacts
+        uses: actions/download-artifact@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ github.token }}
+          merge-multiple: true
 
-      - name: Set up git
-        uses: Homebrew/actions/git-user-config@main
+      - name: Extract version
+        id: version
+        run: |
+          VERSION=$(ls *.bottle.tar.gz | head -1 | sed 's/modastack--\(.*\)\..*/\1/')
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
 
-      - name: Pull bottles
+      - name: Create release and upload bottles
         env:
-          HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PULL_REQUEST: ${{ github.event.pull_request.number }}
-        run: brew pr-pull --debug --tap="$GITHUB_REPOSITORY" "$PULL_REQUEST"
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="modastack-${{ steps.version.outputs.version }}"
+          gh release create "$TAG" --title "$TAG" --notes "Bottles for modastack ${{ steps.version.outputs.version }}" *.bottle.tar.gz || \
+          gh release upload "$TAG" *.bottle.tar.gz --clobber
 
-      - name: Push commits
-        uses: Homebrew/actions/git-try-push@main
-        with:
-          branch: main
+      - name: Update formula with bottle block
+        run: |
+          TAG="modastack-${{ steps.version.outputs.version }}"
+          ROOT_URL="https://github.com/moda-labs/homebrew-modastack/releases/download/${TAG}"
 
-      - name: Delete branch
-        if: github.event.pull_request.head.repo.fork == false
-        env:
-          BRANCH: ${{ github.event.pull_request.head.ref }}
-        run: git push --delete origin "$BRANCH"
+          # Build bottle block from JSON files
+          BOTTLE_BLOCK="  bottle do\n    root_url \"${ROOT_URL}\"\n"
+          for json in *.bottle.json; do
+            CELLAR=$(python3 -c "import json; d=json.load(open('$json')); k=list(d.keys())[0]; t=list(d[k]['bottle']['tags'].keys())[0]; print(d[k]['bottle']['tags'][t].get('cellar', ':any_skip_relocation'))")
+            TAG_NAME=$(python3 -c "import json; d=json.load(open('$json')); k=list(d.keys())[0]; print(list(d[k]['bottle']['tags'].keys())[0])")
+            SHA=$(python3 -c "import json; d=json.load(open('$json')); k=list(d.keys())[0]; t=list(d[k]['bottle']['tags'].keys())[0]; print(d[k]['bottle']['tags'][t]['sha256'])")
+            BOTTLE_BLOCK="${BOTTLE_BLOCK}    sha256 cellar: ${CELLAR}, ${TAG_NAME}: \"${SHA}\"\n"
+          done
+          BOTTLE_BLOCK="${BOTTLE_BLOCK}  end"
+
+          # Insert bottle block after license line
+          sed -i "/^  license/a\\
+          ${BOTTLE_BLOCK}" Formula/modastack.rb
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add Formula/modastack.rb
+          git diff --staged --quiet || git commit -m "add bottles for modastack ${{ steps.version.outputs.version }}"
+          git push

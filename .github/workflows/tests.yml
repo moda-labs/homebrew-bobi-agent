@@ -1,50 +1,36 @@
-name: brew test-bot
+name: Build bottles
 
 on:
-  push:
-    branches:
-      - main
   pull_request:
+  workflow_dispatch:
+    inputs:
+      formula:
+        description: "Formula to bottle (e.g. modastack)"
+        default: "modastack"
 
 jobs:
-  test-bot:
+  bottle:
     strategy:
       matrix:
         os: [macos-15, macos-13]
     runs-on: ${{ matrix.os }}
-    env:
-      HOMEBREW_NO_REQUIRE_TAP_TRUST: 1
-    permissions:
-      actions: read
-      checks: read
-      contents: read
-      pull-requests: read
     steps:
+      - uses: actions/checkout@v4
+
       - name: Set up Homebrew
-        id: set-up-homebrew
-        uses: Homebrew/actions/setup-homebrew@main
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          brew tap moda-labs/modastack "$(pwd)"
 
-      - name: Cache Homebrew Bundler RubyGems
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.set-up-homebrew.outputs.gems-path }}
-          key: ${{ matrix.os }}-rubygems-${{ steps.set-up-homebrew.outputs.gems-hash }}
-          restore-keys: ${{ matrix.os }}-rubygems-
+      - name: Build bottle
+        run: |
+          brew install --build-bottle moda-labs/modastack/modastack
+          brew bottle --no-rebuild --json moda-labs/modastack/modastack
+          ls -la *.bottle.*
 
-      - run: brew test-bot --only-cleanup-before
-
-      - run: brew test-bot --only-setup
-
-      - run: brew test-bot --only-tap-syntax
-
-      - run: brew test-bot --only-formulae
-        if: github.event_name == 'pull_request'
-
-      - name: Upload bottles as artifact
-        if: always() && github.event_name == 'pull_request'
+      - name: Upload bottle
         uses: actions/upload-artifact@v4
         with:
-          name: bottles_${{ matrix.os }}
-          path: '*.bottle.*'
+          name: bottle_${{ matrix.os }}
+          path: |
+            *.bottle.tar.gz
+            *.bottle.json
