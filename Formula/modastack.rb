@@ -7,7 +7,11 @@ class Modastack < Formula
   sha256 "f709734131732d4d8f675fa5275bbeadd636a59e2b26efba530a9f171b380af5"
   license "MIT"
 
+  depends_on "cffi"
+  depends_on "cryptography"
+  depends_on "pycparser"
   depends_on "python@3.13"
+  depends_on "rpds-py"
 
   resource "annotated-doc" do
     url "https://files.pythonhosted.org/packages/57/ba/046ceea27344560984e26a590f90bc7f4a75b06701f653222458922b558c/annotated_doc-0.0.4.tar.gz"
@@ -34,11 +38,6 @@ class Modastack < Formula
     sha256 "69dea482ab64caa7b9f6aba1c6bf48bb6a5448d1c0f1b17ab42ad8c763a5344d"
   end
 
-  resource "cffi" do
-    url "https://files.pythonhosted.org/packages/eb/56/b1ba7935a17738ae8453301356628e8147c79dbb825bcbc73dc7401f9846/cffi-2.0.0.tar.gz"
-    sha256 "44d1b5909021139fe36001ae048dbdde8214afa20200eda0f64c068cac5d5529"
-  end
-
   resource "claude-agent-sdk" do
     url "https://files.pythonhosted.org/packages/0c/d6/0d215ffd601fae784344f098658846cc2555ed22f1c86afbb13764cc3c6a/claude_agent_sdk-0.2.90.tar.gz"
     sha256 "00bebd2e6132ea448eb09343e0065cd4344dbd0a433d92e9155abd561108517b"
@@ -47,11 +46,6 @@ class Modastack < Formula
   resource "click" do
     url "https://files.pythonhosted.org/packages/9b/98/518d8e5081007684232226f475082b30087d0f585e8457db087298259f49/click-8.4.1.tar.gz"
     sha256 "918b5633eddf6b41c32d4f454bf0de810065c74e3f7dbf8ee5452f8be88d3e96"
-  end
-
-  resource "cryptography" do
-    url "https://files.pythonhosted.org/packages/9f/a9/db8f313fdcd85d767d4973515e1db101f9c71f95fced83233de224673757/cryptography-48.0.0.tar.gz"
-    sha256 "5c3932f4436d1cccb036cb0eaef46e6e2db91035166f1ad6505c3c9d5a635920"
   end
 
   resource "fastapi" do
@@ -114,11 +108,6 @@ class Modastack < Formula
     sha256 "8e02db104096d1c25b28e64bde29a5c32b31bc241710213e12fd4d84985bdfef"
   end
 
-  resource "pycparser" do
-    url "https://files.pythonhosted.org/packages/1b/7d/92392ff7815c21062bea51aa7b87d45576f649f16458d78b7cf94b9ab2e6/pycparser-3.0.tar.gz"
-    sha256 "600f49d217304a5902ac3c37e1281c9fe94e4d0489de643a9504c5cdfdfc6b29"
-  end
-
   resource "pydantic" do
     url "https://files.pythonhosted.org/packages/18/a5/b60d21ac674192f8ab0ba4e9fd860690f9b4a6e51ca5df118733b487d8d6/pydantic-2.13.4.tar.gz"
     sha256 "c40756b57adaa8b1efeeced5c196f3f3b7c435f90e84ea7f443901bec8099ef6"
@@ -157,11 +146,6 @@ class Modastack < Formula
   resource "referencing" do
     url "https://files.pythonhosted.org/packages/22/f5/df4e9027acead3ecc63e50fe1e36aca1523e1719559c499951bb4b53188f/referencing-0.37.0.tar.gz"
     sha256 "44aefc3142c5b842538163acb373e24cce6632bd54bdb01b21ad5863489f50d8"
-  end
-
-  resource "rpds-py" do
-    url "https://files.pythonhosted.org/packages/2e/43/25a8dcd3feedd735039a8f0b5b7e3b118232b5eae288c4fd9ab200d41094/rpds_py-2026.5.1.tar.gz"
-    sha256 "07b24fea40541e28570e5b795a4a38fbdcd12550c06bd0748005ecc8116ca256"
   end
 
   resource "sniffio" do
