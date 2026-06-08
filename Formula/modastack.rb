@@ -224,14 +224,16 @@ class Modastack < Formula
   def install
     venv = virtualenv_create(libexec, "python3.13")
 
-    # Rust-based resources need --no-build-isolation to use system maturin
-    ["cryptography", "pydantic_core", "rpds-py", "watchfiles"].each do |name|
-      venv.pip_install resource(name), build_isolation: false
+    # Install non-Rust resources first (Rust resources depend on some of these)
+    rust = ["cryptography", "pydantic_core", "rpds-py", "watchfiles"]
+    resources.each do |r|
+      next if rust.include?(r.name)
+      venv.pip_install r
     end
 
-    resources.each do |r|
-      next if ["cryptography", "pydantic_core", "rpds-py", "watchfiles"].include?(r.name)
-      venv.pip_install r
+    # Rust-based resources need --no-build-isolation to use system maturin
+    rust.each do |name|
+      venv.pip_install resource(name), build_isolation: false
     end
 
     venv.pip_install_and_link buildpath
