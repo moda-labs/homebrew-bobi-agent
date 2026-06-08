@@ -14,7 +14,7 @@ import sys
 import urllib.request
 
 RUST_RESOURCES = {"pydantic-core", "watchfiles", "rpds-py", "cryptography"}
-SKIP_PACKAGES = {"modastack", "pip", "setuptools", "wheel", "maturin"}
+SKIP_PACKAGES = {"modastack", "pip", "wheel", "maturin"}
 
 
 def get_pypi_sdist(name, version):
