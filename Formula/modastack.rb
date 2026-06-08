@@ -1,17 +1,17 @@
 class Modastack < Formula
   include Language::Python::Virtualenv
 
-  desc "AI engineering team: manager + engineer agents with Linear, GitHub, Slack"
+  desc "Event-driven AI agent framework"
   homepage "https://github.com/moda-labs/modastack"
-  url "https://files.pythonhosted.org/packages/cc/2b/05cba392701571bdd8baa91e74703a027383285f9616a265d99bbb03ba39/modastack-0.5.0.tar.gz"
-  sha256 "f709734131732d4d8f675fa5275bbeadd636a59e2b26efba530a9f171b380af5"
+  url "https://files.pythonhosted.org/packages/c0/39/14cdd1de074f10db33078fb109d6013d5b9fbbc066173c810aaf88794bf8/modastack-0.9.3.tar.gz"
+  sha256 "5079e18edd29ab5d9438aa87d523d18e20b9f17196635337e2c0ff69b82bc61b"
   license "MIT"
 
   depends_on "cffi"
   depends_on "cryptography"
   depends_on "pycparser"
-  depends_on "python@3.13"
   depends_on "rpds-py"
+  depends_on "python@3.13"
 
   resource "annotated-doc" do
     url "https://files.pythonhosted.org/packages/57/ba/046ceea27344560984e26a590f90bc7f4a75b06701f653222458922b558c/annotated_doc-0.0.4.tar.gz"
@@ -39,8 +39,8 @@ class Modastack < Formula
   end
 
   resource "claude-agent-sdk" do
-    url "https://files.pythonhosted.org/packages/0c/d6/0d215ffd601fae784344f098658846cc2555ed22f1c86afbb13764cc3c6a/claude_agent_sdk-0.2.90.tar.gz"
-    sha256 "00bebd2e6132ea448eb09343e0065cd4344dbd0a433d92e9155abd561108517b"
+    url "https://files.pythonhosted.org/packages/33/9b/66f0f671095a80f78f80aace954f4475705de17933120ff61bc8acc31d68/claude_agent_sdk-0.2.93.tar.gz"
+    sha256 "4fa2f534028c9054eb34960497147df345cb0042331694dfacd54560dd6378bd"
   end
 
   resource "click" do
@@ -113,14 +113,14 @@ class Modastack < Formula
     sha256 "c40756b57adaa8b1efeeced5c196f3f3b7c435f90e84ea7f443901bec8099ef6"
   end
 
-  resource "pydantic-core" do
-    url "https://files.pythonhosted.org/packages/a7/74/319859f70c733f341df03823c8ca27ce9003faaac3ffa3110f3af1c8641a/pydantic_core-2.47.0.tar.gz"
-    sha256 "422c1797a7864b2a9a996435aba92fe571fb80190f67a31edbc1ac040c7b51fe"
-  end
-
   resource "pydantic-settings" do
     url "https://files.pythonhosted.org/packages/07/60/1d1e59c9c90d54591469ada7d268251f71c24bdb765f1a8a832cee8c6653/pydantic_settings-2.14.1.tar.gz"
     sha256 "e874d3bec7e787b0c9958277956ed9b4dd5de6a80e162188fdaff7c5e26fd5fa"
+  end
+
+  resource "pydantic_core" do
+    url "https://files.pythonhosted.org/packages/9d/56/921726b776ace8d8f5db44c4ef961006580d91dc52b803c489fafd1aa249/pydantic_core-2.46.4.tar.gz"
+    sha256 "62f875393d7f270851f20523dd2e29f082bcc82292d66db2b64ea71f64b6e1c1"
   end
 
   resource "pyjwt" do
@@ -168,14 +168,14 @@ class Modastack < Formula
     sha256 "9d91bd436463ad5e4ee4aba766628dd6cd7010cf3e2461756b3303710eebc301"
   end
 
-  resource "typing-extensions" do
-    url "https://files.pythonhosted.org/packages/72/94/1a15dd82efb362ac84269196e94cf00f187f7ed21c242792a923cdb1c61f/typing_extensions-4.15.0.tar.gz"
-    sha256 "0cea48d173cc12fa28ecabc3b837ea3cf6f38c6d1136f85cbaaf598984861466"
-  end
-
   resource "typing-inspection" do
     url "https://files.pythonhosted.org/packages/55/e3/70399cb7dd41c10ac53367ae42139cf4b1ca5f36bb3dc6c9d33acdb43655/typing_inspection-0.4.2.tar.gz"
     sha256 "ba561c48a67c5958007083d386c3295464928b01faa735ab8547c5692e87f464"
+  end
+
+  resource "typing_extensions" do
+    url "https://files.pythonhosted.org/packages/72/94/1a15dd82efb362ac84269196e94cf00f187f7ed21c242792a923cdb1c61f/typing_extensions-4.15.0.tar.gz"
+    sha256 "0cea48d173cc12fa28ecabc3b837ea3cf6f38c6d1136f85cbaaf598984861466"
   end
 
   resource "uvicorn" do
