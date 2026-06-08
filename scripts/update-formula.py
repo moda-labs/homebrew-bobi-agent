@@ -47,6 +47,19 @@ def main():
     version = sys.argv[1]
 
     packages = get_installed_packages()
+
+    # setuptools is needed by cryptography's Rust build but may not
+    # appear in pip freeze — ensure it's always included.
+    if "setuptools" not in {k.lower() for k in packages}:
+        result = subprocess.run(
+            [sys.executable, "-m", "pip", "show", "setuptools"],
+            capture_output=True, text=True,
+        )
+        for line in result.stdout.split("\n"):
+            if line.startswith("Version:"):
+                packages["setuptools"] = line.split(":", 1)[1].strip()
+                break
+
     mod_url, mod_sha = get_pypi_sdist("modastack", version)
     if not mod_url:
         print(f"ERROR: no sdist for modastack {version}", file=sys.stderr)
