@@ -25,9 +25,13 @@ def get_pypi_info(version):
 
 def get_resources(version):
     result = subprocess.run(
-        ["poet", f"modastack=={version}"],
-        capture_output=True, text=True, check=True,
+        ["poet", "modastack"],
+        capture_output=True, text=True,
     )
+    if result.returncode != 0:
+        print(f"poet stderr: {result.stderr}", file=sys.stderr)
+        print(f"poet stdout: {result.stdout}", file=sys.stderr)
+        result.check_returncode()
     raw = result.stdout.strip()
     if not raw:
         raise RuntimeError("poet produced no output")
