@@ -40,7 +40,6 @@ jobs:
           TAG="modastack-${{ steps.version.outputs.version }}"
           ROOT_URL="https://github.com/moda-labs/homebrew-modastack/releases/download/${TAG}"
 
-          # Build bottle block from JSON files
           BOTTLE_BLOCK="  bottle do\n    root_url \"${ROOT_URL}\"\n"
           for json in *.bottle.json; do
             CELLAR=$(python3 -c "import json; d=json.load(open('$json')); k=list(d.keys())[0]; t=list(d[k]['bottle']['tags'].keys())[0]; print(d[k]['bottle']['tags'][t].get('cellar', ':any_skip_relocation'))")
@@ -50,6 +49,8 @@ jobs:
           done
           BOTTLE_BLOCK="${BOTTLE_BLOCK}  end"
 
+          # Remove existing bottle block if present
+          sed -i '/^  bottle do$/,/^  end$/d' Formula/modastack.rb
           # Insert bottle block after license line
           sed -i "/^  license/a\\
           ${BOTTLE_BLOCK}" Formula/modastack.rb
