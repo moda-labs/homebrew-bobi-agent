@@ -95,14 +95,16 @@ def main():
   def install
     venv = virtualenv_create(libexec, "python3.13")
 
-    # Rust-based resources need --no-build-isolation to use system maturin
-    [{rust_list}].each do |name|
-      venv.pip_install resource(name), build_isolation: false
+    # Install non-Rust resources first (Rust resources depend on some of these)
+    rust = [{rust_list}]
+    resources.each do |r|
+      next if rust.include?(r.name)
+      venv.pip_install r
     end
 
-    resources.each do |r|
-      next if [{rust_list}].include?(r.name)
-      venv.pip_install r
+    # Rust-based resources need --no-build-isolation to use system maturin
+    rust.each do |name|
+      venv.pip_install resource(name), build_isolation: false
     end
 
     venv.pip_install_and_link buildpath
