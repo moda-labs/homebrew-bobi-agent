@@ -32,7 +32,7 @@ def get_pypi_sdist(name, version):
 
 def get_installed_packages():
     result = subprocess.run(
-        [sys.executable, "-m", "pip", "freeze", "--exclude-editable"],
+        [sys.executable, "-m", "pip", "freeze", "--exclude-editable", "--all"],
         capture_output=True, text=True, check=True,
     )
     packages = {}
