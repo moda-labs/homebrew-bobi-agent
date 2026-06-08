@@ -48,12 +48,16 @@ def main():
 
     packages = get_installed_packages()
 
-    # setuptools is needed by cryptography's Rust build but may not
-    # appear in pip freeze — ensure it's always included.
+    # setuptools is needed by cryptography's Rust build but doesn't
+    # appear in pip freeze. Install it explicitly and add it.
     if "setuptools" not in {k.lower() for k in packages}:
+        subprocess.run(
+            [sys.executable, "-m", "pip", "install", "setuptools"],
+            capture_output=True, check=True,
+        )
         result = subprocess.run(
             [sys.executable, "-m", "pip", "show", "setuptools"],
-            capture_output=True, text=True,
+            capture_output=True, text=True, check=True,
         )
         for line in result.stdout.split("\n"):
             if line.startswith("Version:"):
