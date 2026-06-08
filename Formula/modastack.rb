@@ -9,11 +9,12 @@ class Modastack < Formula
 
   depends_on "python@3.13"
 
+  # Pre-built wheels have Rust .so files without enough Mach-O header
+  # padding for Homebrew's install_name_tool rewriting.
+  skip_clean "libexec"
+
   def install
     venv = virtualenv_create(libexec, "python3.13")
-    # Use python -m pip (venv inherits system pip via --system-site-packages)
-    # instead of calling the pip binary (which doesn't exist in the venv).
-    # This installs from wheels, avoiding Rust/C source compilation.
     system libexec/"bin/python3", "-m", "pip", "install", "-v",
            "modastack==#{version}"
     bin.install_symlink libexec/"bin/modastack"
