@@ -28,7 +28,11 @@ jobs:
 
       - name: Build bottle
         run: |
-          brew install --build-bottle moda-labs/modastack/modastack
+          brew install --build-bottle --verbose moda-labs/modastack/modastack 2>&1 || {
+            echo "=== Homebrew install failed. Dumping logs ==="
+            find ~/Library/Logs/Homebrew/modastack/ -type f -exec echo "--- {} ---" \; -exec cat {} \; 2>/dev/null
+            exit 1
+          }
           brew bottle --no-rebuild --json moda-labs/modastack/modastack
           ls -la *.bottle.*
 
