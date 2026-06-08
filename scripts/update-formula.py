@@ -42,10 +42,11 @@ def main():
 
   def install
     venv = virtualenv_create(libexec, "python3.13")
-    # Homebrew creates venvs without pip; bootstrap it so we can
-    # install modastack with binary wheels (avoids Rust/C compilation).
-    system libexec/"bin/python3", "-m", "ensurepip", "--upgrade"
-    system libexec/"bin/pip", "install", "-v", "modastack==#{{version}}"
+    # Use python -m pip (venv inherits system pip via --system-site-packages)
+    # instead of calling the pip binary (which doesn't exist in the venv).
+    # This installs from wheels, avoiding Rust/C source compilation.
+    system libexec/"bin/python3", "-m", "pip", "install", "-v",
+           "modastack==#{{version}}"
     bin.install_symlink libexec/"bin/modastack"
   end
 
