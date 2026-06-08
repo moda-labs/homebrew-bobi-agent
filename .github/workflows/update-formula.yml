@@ -47,7 +47,7 @@ jobs:
       - name: Generate updated formula
         run: |
           VERSION="${{ steps.version.outputs.version }}"
-          pip install homebrew-pypi-poet "modastack==${VERSION}"
+          pip install "modastack==${VERSION}"
           python3 scripts/update-formula.py "$VERSION" > Formula/modastack.rb
           echo "--- Generated formula ---"
           cat Formula/modastack.rb
