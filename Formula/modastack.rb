@@ -3,8 +3,8 @@ class Modastack < Formula
 
   desc "Event-driven AI agent framework"
   homepage "https://github.com/moda-labs/modastack"
-  url "https://files.pythonhosted.org/packages/bf/a0/7facc8c2b57623d6f88e48af1cd1564125ba5f2873ea589d9df5dfbcc144/modastack-0.12.0.tar.gz"
-  sha256 "1064fad6f5f1f8e15925778d0364ceb870ed9af816ebfaab8525e3058be2b8d6"
+  url "https://files.pythonhosted.org/packages/ea/cb/6f5b7ea42a6cf6ac3ad26e0fbda80af1e38ed75dc574d026363ebe7c3211/modastack-0.13.0.tar.gz"
+  sha256 "a9466e9f62d19a3fb3a6eefab97e6d07d8dfba117c4af75d9bd6f2f46bdd8509"
   license "MIT"
 
   depends_on "maturin" => :build
@@ -67,8 +67,8 @@ class Modastack < Formula
   end
 
   resource "filelock" do
-    url "https://files.pythonhosted.org/packages/1f/f9/f38573ed5844586db374d085911740a501ccfa373b455fc9413f09f85237/filelock-3.29.1.tar.gz"
-    sha256 "d97e6b1b9757569626c58caa07dc4beb1613f4a2938b1e8cc81afca398906c9e"
+    url "https://files.pythonhosted.org/packages/ec/fa/b7dc8a63243aafe57bf53611bd26fa3e0dee2d613590656d44e0a59b7828/filelock-3.29.2.tar.gz"
+    sha256 "779d2f5443b584750c6b90457abffd49235bfb0e66ce82ef5a680867e518ca1c"
   end
 
   resource "fsspec" do
@@ -312,8 +312,8 @@ class Modastack < Formula
   end
 
   resource "transformers" do
-    url "https://files.pythonhosted.org/packages/8d/38/d5f978bd5091019e89aef29b9a831f5cd70f2598963a3ead8b9570cab592/transformers-5.10.2.tar.gz"
-    sha256 "f9a44b9c8ca9ab1156b467f574d832ea066284299c2fd0ed84641ccb592751fc"
+    url "https://files.pythonhosted.org/packages/7d/4a/2ee05f9a06bb2dd34cac951548553738a826762fb7adfa7ce256daeaeac8/transformers-5.11.0.tar.gz"
+    sha256 "1dbecade5b8a09bdf3e9e8fdfc9d312cb9eccf5a201080dc894b373f0f3eb5f4"
   end
 
   resource "truststore" do
