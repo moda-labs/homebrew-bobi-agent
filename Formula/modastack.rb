@@ -3,8 +3,8 @@ class Modastack < Formula
 
   desc "Event-driven AI agent framework"
   homepage "https://github.com/moda-labs/modastack"
-  url "https://files.pythonhosted.org/packages/2a/0b/846d3ef7eaa9e55644fca7e8adaab2bab057ea55bf8c470e8f01e795d6ac/modastack-0.10.0.tar.gz"
-  sha256 "bb4814bbf18f98dd5546d0f91f85a423bf6a6f4a30da04a11905ffdbdb88ed7c"
+  url "https://files.pythonhosted.org/packages/f1/c7/3ef605d7bd07aa2d8f8bcd2c938ee847bae036cf69845ce6ce3065f8c556/modastack-0.11.0.tar.gz"
+  sha256 "dcf42634f9e7be333d267a08c7d0de229c8e3c020cb8fd6a2c74cf51b0754914"
   license "MIT"
 
   depends_on "maturin" => :build
@@ -47,8 +47,8 @@ class Modastack < Formula
   end
 
   resource "claude-agent-sdk" do
-    url "https://files.pythonhosted.org/packages/33/9b/66f0f671095a80f78f80aace954f4475705de17933120ff61bc8acc31d68/claude_agent_sdk-0.2.93.tar.gz"
-    sha256 "4fa2f534028c9054eb34960497147df345cb0042331694dfacd54560dd6378bd"
+    url "https://files.pythonhosted.org/packages/35/f4/c7210c402c92f97f1edfdb0d6eb7f015c64259e8744fcfbeb7d8214919a2/claude_agent_sdk-0.2.95.tar.gz"
+    sha256 "0e01537bd3c7d1a43329f1aa4914f0b8d24cfdd12cb58dc4bc67ee57d72cf725"
   end
 
   resource "click" do
@@ -57,8 +57,8 @@ class Modastack < Formula
   end
 
   resource "cryptography" do
-    url "https://files.pythonhosted.org/packages/9f/a9/db8f313fdcd85d767d4973515e1db101f9c71f95fced83233de224673757/cryptography-48.0.0.tar.gz"
-    sha256 "5c3932f4436d1cccb036cb0eaef46e6e2db91035166f1ad6505c3c9d5a635920"
+    url "https://files.pythonhosted.org/packages/12/45/870e7f4bef50e5f53b9f51d4428aee5290eedf58ba443f16b1ebb7ab8e66/cryptography-48.0.1.tar.gz"
+    sha256 "266f4ee051abb2f725b74ef8072b521ce1feacf685a3364fa6a6b45548db791a"
   end
 
   resource "fastapi" do
@@ -82,8 +82,8 @@ class Modastack < Formula
   end
 
   resource "hf-xet" do
-    url "https://files.pythonhosted.org/packages/74/d8/5c06fc76461418326a7decf8367480c35be11a41fd938633929c60a9ec6b/hf_xet-1.5.0.tar.gz"
-    sha256 "e0fb0a34d9f406eed88233e829a67ec016bec5af19e480eac65a233ea289a948"
+    url "https://files.pythonhosted.org/packages/4b/2d/57fd21d84d93efb4bd0b962383790e19dd1bc053501b4264c97903b4e83e/hf_xet-1.5.1.tar.gz"
+    sha256 "51ef4500dab3764b41135ee1381a4b62ce56fc54d4c92b719b59e597d6df5bf6"
   end
 
   resource "httpcore" do
@@ -247,8 +247,8 @@ class Modastack < Formula
   end
 
   resource "safetensors" do
-    url "https://files.pythonhosted.org/packages/29/9c/6e74567782559a63bd040a236edca26fd71bc7ba88de2ef35d75df3bca5e/safetensors-0.7.0.tar.gz"
-    sha256 "07663963b67e8bd9f0b8ad15bb9163606cd27cc5a1b96235a50d8369803b96b0"
+    url "https://files.pythonhosted.org/packages/45/06/f955dbbb1859e3bd23c8ac6141af5106e7ad5fedec4a3a6e3d60f94b7001/safetensors-0.8.0.tar.gz"
+    sha256 "fabaf3e0f18a6618d9b36560682562157f77c2b71fcffc7b432be2baed9d753d"
   end
 
   resource "scikit-learn" do
@@ -307,8 +307,8 @@ class Modastack < Formula
   end
 
   resource "tqdm" do
-    url "https://files.pythonhosted.org/packages/06/b3/36c8ecf72e8925200671613332db156d84b99b3aee742a41c1938ebb0808/tqdm-4.68.1.tar.gz"
-    sha256 "fc163d96b287bd031e1aa24421ce4411b25559bd0a1be4fe649bdaa4d2c02bf5"
+    url "https://files.pythonhosted.org/packages/85/05/0d5260f1f1ca784f4a4a0def9cbe6affe587f5b4025328d446c3d67765f4/tqdm-4.68.2.tar.gz"
+    sha256 "89c230e8dbc67c7615c142487111222f878c77427ea09549960f62389e258add"
   end
 
   resource "transformers" do
