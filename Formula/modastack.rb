@@ -3,8 +3,8 @@ class Modastack < Formula
 
   desc "Event-driven AI agent framework"
   homepage "https://github.com/moda-labs/modastack"
-  url "https://files.pythonhosted.org/packages/d2/bd/91f5bf7d4e0dab0f2d6c55cb3f2d0b4513872a58a61d926ced1f9cf880ce/modastack-0.14.1.tar.gz"
-  sha256 "b509ab159f1634bdb2b16bb477b9f4909a42026d132691fb926ff818b5b3952d"
+  url "https://files.pythonhosted.org/packages/48/ec/fdafd969ae1a1109cb635d7e576e8bb369794686bb7de5e450f2952c06b9/modastack-0.14.2.tar.gz"
+  sha256 "2655a98c6fca6b0988ce646b1332cb35eca20f6624bf4b35261b42ccee16a05d"
   license "MIT"
 
   depends_on "maturin" => :build
