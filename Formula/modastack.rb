@@ -3,8 +3,8 @@ class Modastack < Formula
 
   desc "Event-driven AI agent framework"
   homepage "https://github.com/moda-labs/modastack"
-  url "https://files.pythonhosted.org/packages/ea/cb/6f5b7ea42a6cf6ac3ad26e0fbda80af1e38ed75dc574d026363ebe7c3211/modastack-0.13.0.tar.gz"
-  sha256 "a9466e9f62d19a3fb3a6eefab97e6d07d8dfba117c4af75d9bd6f2f46bdd8509"
+  url "https://files.pythonhosted.org/packages/23/68/698e279029070f985f9c245ab73fbd38a48d66ced029d571def4f04b7635/modastack-0.14.0.tar.gz"
+  sha256 "19a8af9dc39f0f5d98a5b7e0745fd5704bb50f8ca2694109c9ec4f0c722fe4a0"
   license "MIT"
 
   depends_on "maturin" => :build
@@ -47,8 +47,8 @@ class Modastack < Formula
   end
 
   resource "claude-agent-sdk" do
-    url "https://files.pythonhosted.org/packages/35/f4/c7210c402c92f97f1edfdb0d6eb7f015c64259e8744fcfbeb7d8214919a2/claude_agent_sdk-0.2.95.tar.gz"
-    sha256 "0e01537bd3c7d1a43329f1aa4914f0b8d24cfdd12cb58dc4bc67ee57d72cf725"
+    url "https://files.pythonhosted.org/packages/0f/e8/ce86f503f0e1548440ae3e35dbe99da6ba76715bc135c8c9f5f7c2bdd7d6/claude_agent_sdk-0.2.96.tar.gz"
+    sha256 "1932030ab114da9398e94bcc86b177b6ff579f5740238fb5c87751f8e745f572"
   end
 
   resource "click" do
@@ -67,8 +67,8 @@ class Modastack < Formula
   end
 
   resource "filelock" do
-    url "https://files.pythonhosted.org/packages/ec/fa/b7dc8a63243aafe57bf53611bd26fa3e0dee2d613590656d44e0a59b7828/filelock-3.29.2.tar.gz"
-    sha256 "779d2f5443b584750c6b90457abffd49235bfb0e66ce82ef5a680867e518ca1c"
+    url "https://files.pythonhosted.org/packages/91/f5/3557bf28e0f1943e4849154c821533706e6dea010f96fb6aa0b6949037d1/filelock-3.29.3.tar.gz"
+    sha256 "7fc1b3f39cf172fd8203812043c57b8a65aef9969f38b6704f628b881f761a84"
   end
 
   resource "fsspec" do
