@@ -3,8 +3,8 @@ class Modastack < Formula
 
   desc "Event-driven AI agent framework"
   homepage "https://github.com/moda-labs/modastack"
-  url "https://files.pythonhosted.org/packages/48/ec/fdafd969ae1a1109cb635d7e576e8bb369794686bb7de5e450f2952c06b9/modastack-0.14.2.tar.gz"
-  sha256 "2655a98c6fca6b0988ce646b1332cb35eca20f6624bf4b35261b42ccee16a05d"
+  url "https://files.pythonhosted.org/packages/24/f4/541eac0d8ab907e157cea6cc1020bd9a9acf0474260add0fa72f7ed9a142/modastack-0.15.0.tar.gz"
+  sha256 "b82cbecbb2fb302c256a4ce0596d54770c5a416e30ef1c2163ad8b1e8f70e66d"
   license "MIT"
 
   depends_on "maturin" => :build
@@ -47,8 +47,8 @@ class Modastack < Formula
   end
 
   resource "claude-agent-sdk" do
-    url "https://files.pythonhosted.org/packages/0f/e8/ce86f503f0e1548440ae3e35dbe99da6ba76715bc135c8c9f5f7c2bdd7d6/claude_agent_sdk-0.2.96.tar.gz"
-    sha256 "1932030ab114da9398e94bcc86b177b6ff579f5740238fb5c87751f8e745f572"
+    url "https://files.pythonhosted.org/packages/fc/a2/50ba0002ef6ebfc3479244ce6fa309dfe914f57bf93df3faf72978d63249/claude_agent_sdk-0.2.97.tar.gz"
+    sha256 "9104d15df11be5c95d36331968d49b17f30f0bb802415a19495744931bd76613"
   end
 
   resource "click" do
@@ -107,8 +107,8 @@ class Modastack < Formula
   end
 
   resource "huggingface_hub" do
-    url "https://files.pythonhosted.org/packages/fb/d8/748ea0a47f0fa15227fe682f7a80826b4b7c096e4818044b8f56d6cb66d6/huggingface_hub-1.18.0.tar.gz"
-    sha256 "f0c5ecd1ef8c6a60f86f61ee278f2c1570ba9e279c9f54de9094210723b3613b"
+    url "https://files.pythonhosted.org/packages/88/27/629cfe58c582f92ded066c4a07d1a057ff617118ab7973200f770bd853cb/huggingface_hub-1.19.0.tar.gz"
+    sha256 "fd771622182d40977272a923953ee3b1b13538f9f8a7f5d78398f10af0f1c0bd"
   end
 
   resource "idna" do
@@ -287,8 +287,8 @@ class Modastack < Formula
   end
 
   resource "starlette" do
-    url "https://files.pythonhosted.org/packages/25/44/ec35f1b6e83094b997da438a02c8c9b0ade2b1e84cfc48bd4656780760a6/starlette-1.2.1.tar.gz"
-    sha256 "9b9b5ebb992e67d6093741e63c2f59e4f6fff986f81163c087867bd7b924b3f6"
+    url "https://files.pythonhosted.org/packages/c1/37/cc24e33974e1439cf5ca62b0735b63026eabb768f472d8775f52d5851ed9/starlette-1.3.0.tar.gz"
+    sha256 "bb58cbb7a699da4ee4be9ed4cdfe4bc5b0390aa6dac1d1ac714ebebe8dc3c8df"
   end
 
   resource "sympy" do
