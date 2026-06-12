@@ -3,8 +3,8 @@ class Modastack < Formula
 
   desc "Event-driven AI agent framework"
   homepage "https://github.com/moda-labs/modastack"
-  url "https://files.pythonhosted.org/packages/34/59/9646534428d98ecd161b72cd6e553b2bc7136eedb581f1d27ba0467593a2/modastack-0.17.0.tar.gz"
-  sha256 "901ff8873c409e838a52c48fcb88265f5dd8e2d3fffe70dd798d23940e7a40ea"
+  url "https://files.pythonhosted.org/packages/03/2a/d670b18aa02656411239b423a39cebfda2e18ec1e0d33f7df7e8183aee03/modastack-0.18.0.tar.gz"
+  sha256 "b8f90133e6a459c82f73dca3896a2b5cb1befa5de40742afed533ebac4ba7844"
   license "MIT"
 
   depends_on "maturin" => :build
@@ -47,8 +47,8 @@ class Modastack < Formula
   end
 
   resource "claude-agent-sdk" do
-    url "https://files.pythonhosted.org/packages/af/33/cf624d19b545260bdf8815f2405534a387619250338e4020f353e4062483/claude_agent_sdk-0.2.98.tar.gz"
-    sha256 "c9cea7dd6e98c1bab1a9f1fa14091c27f0eb78c2f30b6df8004b9aec0ce51653"
+    url "https://files.pythonhosted.org/packages/42/76/6d4d26e0c88684ad468f00d03b6b5fa90ae01e7d49cfa962e2a3d50be26c/claude_agent_sdk-0.2.99.tar.gz"
+    sha256 "1f24642020b374fa54020d4ba642fab8abe8afdee881b97d011a984f5a06cb72"
   end
 
   resource "click" do
@@ -287,8 +287,8 @@ class Modastack < Formula
   end
 
   resource "starlette" do
-    url "https://files.pythonhosted.org/packages/c1/37/cc24e33974e1439cf5ca62b0735b63026eabb768f472d8775f52d5851ed9/starlette-1.3.0.tar.gz"
-    sha256 "bb58cbb7a699da4ee4be9ed4cdfe4bc5b0390aa6dac1d1ac714ebebe8dc3c8df"
+    url "https://files.pythonhosted.org/packages/eb/e3/7c1dc7381d9f8ab7d854328ebfa884e62cb3f3d8549ddfd37c7814f42afa/starlette-1.3.1.tar.gz"
+    sha256 "05d0213193f2fbaae60e2ecb593b4add4262ad4e46536b54abe36f11a71724e0"
   end
 
   resource "sympy" do
@@ -312,8 +312,8 @@ class Modastack < Formula
   end
 
   resource "transformers" do
-    url "https://files.pythonhosted.org/packages/7d/4a/2ee05f9a06bb2dd34cac951548553738a826762fb7adfa7ce256daeaeac8/transformers-5.11.0.tar.gz"
-    sha256 "1dbecade5b8a09bdf3e9e8fdfc9d312cb9eccf5a201080dc894b373f0f3eb5f4"
+    url "https://files.pythonhosted.org/packages/0c/f9/4552e2ba55db1c943aea0d4c09a32e9cbe5445b9eabe9856900de503dc8f/transformers-5.12.0.tar.gz"
+    sha256 "f0cf42ae1464c2eb41e7e0e66d7fd4b66145f48af17093b4cc0b2e9781faa7f4"
   end
 
   resource "truststore" do
