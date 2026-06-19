@@ -3,14 +3,9 @@ class Modastack < Formula
 
   desc "Event-driven AI agent framework"
   homepage "https://github.com/moda-labs/modastack"
-  url "https://files.pythonhosted.org/packages/3d/e1/9a3f43b5dde720b03766eb15bc2bb0ef899eb569c2da7c6da92ee32243a5/modastack-0.22.0.tar.gz"
-  sha256 "fbdd28fbd59b7e7daaf655a6a5c4b0c725506c22606f0ce6da9447c86ba273c8"
+  url "https://files.pythonhosted.org/packages/01/9f/b9f9247fb7f8e7df8611ff372223162473909dcff9abad710d21a3c3b86d/modastack-0.23.0.tar.gz"
+  sha256 "d2c8388e6953d5699a5f34a0c98708311a7f3b9ca0cda0921e776016f1be28dc"
   license "MIT"
-  bottle do
-    root_url "https://github.com/moda-labs/homebrew-modastack/releases/download/modastack-0.22.0.arm64_sequoia.bottle.tar"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "acb2f35cff9a8089c8e9da1eff5358b22e6afd2d6b2d766e2713f962f9d6e1d0"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma: "38ed3d1d0fd5ffefb051b7004a44d5b88f12349c81f50ee7cc1ef39345b88b69"
-  end
 
   depends_on "maturin" => :build
   depends_on "rust" => :build
@@ -52,8 +47,8 @@ class Modastack < Formula
   end
 
   resource "claude-agent-sdk" do
-    url "https://files.pythonhosted.org/packages/a6/14/0da3c38ba2fd8dd621bbc458d032eb77f75e745ae6d7b57be31c720c336b/claude_agent_sdk-0.2.104.tar.gz"
-    sha256 "b763b162337dc805916896e460f6c6d813523c9d0a6426b5b52c99c6ca17d740"
+    url "https://files.pythonhosted.org/packages/e7/b2/6f506b855dcd625ae38a5bd9ae2cf5f7bb5f02540e8f2871de8dbacc1395/claude_agent_sdk-0.2.105.tar.gz"
+    sha256 "a376a757fd8d6951e1a43b673ed4a24378d586a2937a511426fd9ea8321a865e"
   end
 
   resource "click" do
@@ -137,8 +132,8 @@ class Modastack < Formula
   end
 
   resource "pydantic-settings" do
-    url "https://files.pythonhosted.org/packages/07/60/1d1e59c9c90d54591469ada7d268251f71c24bdb765f1a8a832cee8c6653/pydantic_settings-2.14.1.tar.gz"
-    sha256 "e874d3bec7e787b0c9958277956ed9b4dd5de6a80e162188fdaff7c5e26fd5fa"
+    url "https://files.pythonhosted.org/packages/5c/b5/8f48e906c3e0205276e8bd8cb7512217a87b2685304d64be27cad5b3019f/pydantic_settings-2.14.2.tar.gz"
+    sha256 "c19dd64b19097f1de80184f0cc7b0272a13ae6e170cbf240a3e27e381ed14a5f"
   end
 
   resource "pydantic_core" do
