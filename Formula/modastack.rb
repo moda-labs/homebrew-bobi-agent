@@ -3,14 +3,9 @@ class Modastack < Formula
 
   desc "Event-driven AI agent framework"
   homepage "https://github.com/moda-labs/modastack"
-  url "https://files.pythonhosted.org/packages/01/9f/b9f9247fb7f8e7df8611ff372223162473909dcff9abad710d21a3c3b86d/modastack-0.23.0.tar.gz"
-  sha256 "d2c8388e6953d5699a5f34a0c98708311a7f3b9ca0cda0921e776016f1be28dc"
+  url "https://files.pythonhosted.org/packages/25/d0/2a0d240a3e5694c5cf34f0d4fe341677d783dda8b869b97375685bafd686/modastack-0.24.0.tar.gz"
+  sha256 "121208721b95ee6f7a0cba3c61b2b7051e726d46dc5e4a37e65f1e2d58db6537"
   license "MIT"
-  bottle do
-    root_url "https://github.com/moda-labs/homebrew-modastack/releases/download/modastack-0.23.0.arm64_sequoia.bottle.tar"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "f56ea687f43c1d97718bce866d7935e8d28610d2d14c73a76db9c8ebb5f387ce"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma: "a287f32def1e4b89a5f8895c20e788e589da2eb72ec357e89cc81007432201af"
-  end
 
   depends_on "maturin" => :build
   depends_on "rust" => :build
@@ -67,8 +62,8 @@ class Modastack < Formula
   end
 
   resource "fastapi" do
-    url "https://files.pythonhosted.org/packages/e2/29/cc5819dc24d3daa80cdaa1aec023bf8652a70dd7fd1c96b0b225c99a7690/fastapi-0.137.2.tar.gz"
-    sha256 "b9d893bebc97dcfbdcb1917e88a292d062844ea19445a5fa4f7eb28c4baea9e3"
+    url "https://files.pythonhosted.org/packages/5b/58/ff455d9fe47c60abadb34b9e05a304b1f05f5ab8000ac01565156b6f5e43/fastapi-0.138.0.tar.gz"
+    sha256 "d445a4877636ad191e7053e08c9bf98cb921a6756776848400bb773d1740c061"
   end
 
   resource "h11" do
