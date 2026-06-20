@@ -6,6 +6,11 @@ class Modastack < Formula
   url "https://files.pythonhosted.org/packages/25/d0/2a0d240a3e5694c5cf34f0d4fe341677d783dda8b869b97375685bafd686/modastack-0.24.0.tar.gz"
   sha256 "121208721b95ee6f7a0cba3c61b2b7051e726d46dc5e4a37e65f1e2d58db6537"
   license "MIT"
+  bottle do
+    root_url "https://github.com/moda-labs/homebrew-modastack/releases/download/modastack-0.24.0.arm64_sequoia.bottle.tar"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "2655cfc4e368d0e74c87766decafecea08cb0de40a10552e34b4210b0ea92f02"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma: "e98fc8ddb08985e57f996c6d8359d1221a92875fddba8abfd3c0778baadf6741"
+  end
 
   depends_on "maturin" => :build
   depends_on "rust" => :build
