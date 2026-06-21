@@ -3,14 +3,9 @@ class Modastack < Formula
 
   desc "Event-driven AI agent framework"
   homepage "https://github.com/moda-labs/modastack"
-  url "https://files.pythonhosted.org/packages/25/d0/2a0d240a3e5694c5cf34f0d4fe341677d783dda8b869b97375685bafd686/modastack-0.24.0.tar.gz"
-  sha256 "121208721b95ee6f7a0cba3c61b2b7051e726d46dc5e4a37e65f1e2d58db6537"
+  url "https://files.pythonhosted.org/packages/a7/ca/b9ba32803a1a5cdd9712fb2e6b610c4b21ef28b2f120b128c3e9f0ca1309/modastack-0.27.0.tar.gz"
+  sha256 "75853bcfcb8928c20761e24ed2f84e4ff52b4a4671d021ffb30798828c7e59e7"
   license "MIT"
-  bottle do
-    root_url "https://github.com/moda-labs/homebrew-modastack/releases/download/modastack-0.24.0.arm64_sequoia.bottle.tar"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "2655cfc4e368d0e74c87766decafecea08cb0de40a10552e34b4210b0ea92f02"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma: "e98fc8ddb08985e57f996c6d8359d1221a92875fddba8abfd3c0778baadf6741"
-  end
 
   depends_on "maturin" => :build
   depends_on "rust" => :build
@@ -52,8 +47,8 @@ class Modastack < Formula
   end
 
   resource "claude-agent-sdk" do
-    url "https://files.pythonhosted.org/packages/e7/b2/6f506b855dcd625ae38a5bd9ae2cf5f7bb5f02540e8f2871de8dbacc1395/claude_agent_sdk-0.2.105.tar.gz"
-    sha256 "a376a757fd8d6951e1a43b673ed4a24378d586a2937a511426fd9ea8321a865e"
+    url "https://files.pythonhosted.org/packages/69/73/f5edec88b9548c3757e429dbfc62b16e46cac1300c9463cbb83ed5281266/claude_agent_sdk-0.2.106.tar.gz"
+    sha256 "26c20cf75db1ed609aae6217cb6dd40844365c66acf3a7abf4e877671695228e"
   end
 
   resource "click" do
@@ -187,8 +182,8 @@ class Modastack < Formula
   end
 
   resource "sse-starlette" do
-    url "https://files.pythonhosted.org/packages/f7/2b/58abc2d1fd397e7dde08e947e05c884d8ef2f78d5e2588c17a12d42d6994/sse_starlette-3.4.4.tar.gz"
-    sha256 "07e0fa0460138baf25cdd5fb28683472c3995dc1642225191b3832d62526bcb0"
+    url "https://files.pythonhosted.org/packages/d2/1b/bc9e3e7a72dcdad7dc7888758f5d00f56f8909ed5cfdff822bd72bb4c520/sse_starlette-3.4.5.tar.gz"
+    sha256 "83072538bc211a2f68b7b0422226c4af3e9b62e106e07034664b832ca019842a"
   end
 
   resource "starlette" do
