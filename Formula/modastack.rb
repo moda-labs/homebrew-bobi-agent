@@ -3,14 +3,9 @@ class Modastack < Formula
 
   desc "Event-driven AI agent framework"
   homepage "https://github.com/moda-labs/modastack"
-  url "https://files.pythonhosted.org/packages/3e/62/a017ce019627a70dc52868eca14eef5d4f004b9038fa8fa85183904dc1d6/modastack-0.28.0.tar.gz"
-  sha256 "13a738089ff821f2affe7f69f6d9e84622e45db9f58181534c3eadfc96080cf7"
+  url "https://files.pythonhosted.org/packages/a2/44/becef12c1252a5b9385c9b3d38b6dcc473dcbb9f76eefb778907077c0c6b/modastack-0.31.0.tar.gz"
+  sha256 "266126715bca4dd4f735cc899fb926c7c300c9e7871f35a34dfb4bf40dda9484"
   license "MIT"
-  bottle do
-    root_url "https://github.com/moda-labs/homebrew-modastack/releases/download/modastack-0.28.0.arm64_sequoia.bottle.tar"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "1d29ac547e2c7f4e055f17ea77e1427862ac4bea8f8f4d6c8858663cd23905f9"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma: "8abce19897a3e87dddf7977a0bd3a1ea17c69f1f9fde5eb5db2841de951b7147"
-  end
 
   depends_on "maturin" => :build
   depends_on "rust" => :build
@@ -52,8 +47,8 @@ class Modastack < Formula
   end
 
   resource "claude-agent-sdk" do
-    url "https://files.pythonhosted.org/packages/69/73/f5edec88b9548c3757e429dbfc62b16e46cac1300c9463cbb83ed5281266/claude_agent_sdk-0.2.106.tar.gz"
-    sha256 "26c20cf75db1ed609aae6217cb6dd40844365c66acf3a7abf4e877671695228e"
+    url "https://files.pythonhosted.org/packages/c9/35/34b602015ebff64e5d39a0bb481679a4dd0a474d4c0afc5d3ac946b82af3/claude_agent_sdk-0.2.108.tar.gz"
+    sha256 "65bbb67593570d5752f596af71743ed9063e08116b847cd4cd3c15d86ee392b2"
   end
 
   resource "click" do
