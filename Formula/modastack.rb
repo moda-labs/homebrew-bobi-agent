@@ -3,14 +3,9 @@ class Modastack < Formula
 
   desc "Event-driven AI agent framework"
   homepage "https://github.com/moda-labs/modastack"
-  url "https://files.pythonhosted.org/packages/c5/2c/643c8a7cfc912ad6471950490ffe1ece9f50c0061fd97a1cc02eedfdc913/modastack-0.32.0.tar.gz"
-  sha256 "34322666c3a1746b1e377c1e5f8a7e31fc82f880340b7ef91e8efd7d0483baf4"
+  url "https://files.pythonhosted.org/packages/ce/5c/18a95111e7cdbc5d513aca32de60cb60c8154f7eb7ecbee8e49ce5bc0709/modastack-0.33.0.tar.gz"
+  sha256 "449c4b50a23824953cd1422ccabf6457da55ac2d2a44be22398c278c9744a460"
   license "MIT"
-  bottle do
-    root_url "https://github.com/moda-labs/homebrew-modastack/releases/download/modastack-0.32.0.arm64_sequoia.bottle.tar"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "7865d9963fcbe0c6a2c10c2bd0c6b4a5fedf45ab378d0817be5833f70cb3aeb4"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma: "a651e9bb826542526c5487f3d52944c7fd40e511115080bc8d0648b8890dd5fc"
-  end
 
   depends_on "maturin" => :build
   depends_on "rust" => :build
@@ -27,8 +22,8 @@ class Modastack < Formula
   end
 
   resource "anyio" do
-    url "https://files.pythonhosted.org/packages/1c/b5/001890774a9552aff22502b8da382593109ce0c95314abaebbb116567545/anyio-4.14.0.tar.gz"
-    sha256 "b47c1f9ccf73e67021df785332508f99379c68fa7d0684e8e3492cb1d4b23f89"
+    url "https://files.pythonhosted.org/packages/3b/72/5562aabb8dd7181e8e860622a38bea08d17842b99ecd4c91f84ac95251b0/anyio-4.14.1.tar.gz"
+    sha256 "8d648a3544c1a700e3ff78615cd679e4c5c3f149904287e73687b2596963629e"
   end
 
   resource "apsw" do
@@ -52,13 +47,13 @@ class Modastack < Formula
   end
 
   resource "claude-agent-sdk" do
-    url "https://files.pythonhosted.org/packages/c9/35/34b602015ebff64e5d39a0bb481679a4dd0a474d4c0afc5d3ac946b82af3/claude_agent_sdk-0.2.108.tar.gz"
-    sha256 "65bbb67593570d5752f596af71743ed9063e08116b847cd4cd3c15d86ee392b2"
+    url "https://files.pythonhosted.org/packages/bb/98/8fdab35ed9e1a36bc7afab4d390cc5002094a4950996c079da9aa4541cc4/claude_agent_sdk-0.2.110.tar.gz"
+    sha256 "538b548bac07a22f65686abab063a902ac76ba35989d0f073c942f96248e9fa3"
   end
 
   resource "click" do
-    url "https://files.pythonhosted.org/packages/9b/98/518d8e5081007684232226f475082b30087d0f585e8457db087298259f49/click-8.4.1.tar.gz"
-    sha256 "918b5633eddf6b41c32d4f454bf0de810065c74e3f7dbf8ee5452f8be88d3e96"
+    url "https://files.pythonhosted.org/packages/76/d4/81420972a676e8ffea40450d8c8c92943e7218a78fe9b64359836cc9876b/click-8.4.2.tar.gz"
+    sha256 "9a6cea6e60b17ebe0a44c5cc636d94f09bd66142c1cd7d8b4cd731c4917a15f6"
   end
 
   resource "cryptography" do
