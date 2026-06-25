@@ -3,14 +3,9 @@ class Modastack < Formula
 
   desc "Event-driven AI agent framework"
   homepage "https://github.com/moda-labs/modastack"
-  url "https://files.pythonhosted.org/packages/63/9e/7a6b28724d4e2caf6194ee61702aed5d7930983b2ae29a55da1b1c86b763/modastack-0.34.2.tar.gz"
-  sha256 "172c2b536a5585ffcbd5457faef53f133e5d6cb87bb3387a89d12cf00532120e"
+  url "https://files.pythonhosted.org/packages/f7/1d/1aeedc0ea82b6670a246b4755f48eef0a15994b9d4dc2822c99799902658/modastack-0.34.3.tar.gz"
+  sha256 "fedc2d10accd50b04b766b7ec5beba1232cbd7bd1ffaf6d557619489fdbadbff"
   license "MIT"
-  bottle do
-    root_url "https://github.com/moda-labs/homebrew-modastack/releases/download/modastack-0.34.2.arm64_sequoia.bottle.tar"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "d0ed9bb9af6c643d0ba9a8b22d73c4e318ea449102e975b666aa48cd2c09a403"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma: "85bb96e95289abbecc641d897c203245be338d5fdfa3e2b6dac65b145fdc6c0b"
-  end
 
   depends_on "maturin" => :build
   depends_on "rust" => :build
