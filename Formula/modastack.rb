@@ -7,7 +7,7 @@ class Modastack < Formula
   sha256 "449c4b50a23824953cd1422ccabf6457da55ac2d2a44be22398c278c9744a460"
   license "MIT"
   bottle do
-    root_url "https://github.com/moda-labs/homebrew-modastack/releases/download/modastack-0.33.0.arm64_sequoia.bottle.tar"
+    root_url "https://github.com/moda-labs/homebrew-modastack/releases/download/modastack-0.33.0"
     sha256 cellar: :any_skip_relocation, arm64_sequoia: "2090ed301a53f762ae7bea8f6b61fe3ef0cc81f94f8b924dd9afac2e2ff05e97"
     sha256 cellar: :any_skip_relocation, arm64_sonoma: "d8012b3fd99a62b8e7b432dfc44e33a4d510323e634e8628ba4decdeac59d967"
   end
