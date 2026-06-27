@@ -48,6 +48,7 @@ jobs:
         run: |
           VERSION="${{ steps.version.outputs.version }}"
           pip install "bobi==${VERSION}"
+          mkdir -p Formula
           python3 scripts/update-formula.py "$VERSION" > Formula/bobi.rb
           echo "--- Generated formula ---"
           cat Formula/bobi.rb
