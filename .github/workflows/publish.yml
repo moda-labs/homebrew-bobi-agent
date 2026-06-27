@@ -7,7 +7,9 @@ on:
 
 jobs:
   publish:
-    if: github.event.workflow_run.conclusion == 'success'
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'workflow_run'
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -24,48 +26,56 @@ jobs:
       - name: Extract version
         id: version
         run: |
-          VERSION=$(
-            python3 - <<'PY'
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
           from pathlib import Path
           import re
           import sys
 
           versions = set()
+          formulae = set()
           for bottle in Path(".").glob("*.bottle.tar.gz"):
-              match = re.match(r"^modastack--(.+)\.[^.]+\.bottle\.tar\.gz$", bottle.name)
+              match = re.match(r"^(?P<formula>.+)--(?P<version>.+?)\.[^.]+\.bottle\.tar\.gz$", bottle.name)
               if not match:
                   print(f"Unexpected bottle filename: {bottle.name}", file=sys.stderr)
                   sys.exit(1)
-              versions.add(match.group(1))
+              formulae.add(match.group("formula"))
+              versions.add(match.group("version"))
 
-          if len(versions) != 1:
-              print(f"Expected exactly one bottle version, found: {sorted(versions)}", file=sys.stderr)
+          if len(formulae) != 1 or len(versions) != 1:
+              print(
+                  f"Expected exactly one formula/version, found formulae={sorted(formulae)} versions={sorted(versions)}",
+                  file=sys.stderr,
+              )
               sys.exit(1)
 
-          print(versions.pop())
+          print(f"formula={formulae.pop()}")
+          print(f"version={versions.pop()}")
           PY
-          )
-          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
 
       - name: Normalize bottle asset names
         run: |
-          for bottle in modastack--*.bottle.tar.gz; do
+          FORMULA="${{ steps.version.outputs.formula }}"
+          for bottle in "${FORMULA}"--*.bottle.tar.gz; do
             [ -e "$bottle" ] || continue
-            mv "$bottle" "${bottle/modastack--/modastack-}"
+            mv "$bottle" "${bottle/${FORMULA}--/${FORMULA}-}"
           done
 
       - name: Create release and upload bottles
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          TAG="modastack-${{ steps.version.outputs.version }}"
-          gh release create "$TAG" --title "$TAG" --notes "Bottles for modastack ${{ steps.version.outputs.version }}" *.bottle.tar.gz || \
+          FORMULA="${{ steps.version.outputs.formula }}"
+          VERSION="${{ steps.version.outputs.version }}"
+          TAG="${FORMULA}-${VERSION}"
+          gh release create "$TAG" --title "$TAG" --notes "Bottles for ${FORMULA} ${VERSION}" *.bottle.tar.gz || \
           gh release upload "$TAG" *.bottle.tar.gz --clobber
 
       - name: Update formula with bottle block
         run: |
-          TAG="modastack-${{ steps.version.outputs.version }}"
-          ROOT_URL="https://github.com/moda-labs/homebrew-modastack/releases/download/${TAG}"
+          FORMULA="${{ steps.version.outputs.formula }}"
+          VERSION="${{ steps.version.outputs.version }}"
+          TAG="${FORMULA}-${VERSION}"
+          ROOT_URL="https://github.com/moda-labs/homebrew-bobi-agent/releases/download/${TAG}"
 
           BOTTLE_BLOCK="  bottle do\n    root_url \"${ROOT_URL}\"\n"
           for json in *.bottle.json; do
@@ -76,14 +86,12 @@ jobs:
           done
           BOTTLE_BLOCK="${BOTTLE_BLOCK}  end"
 
-          # Remove existing bottle block if present
-          sed -i '/^  bottle do$/,/^  end$/d' Formula/modastack.rb
-          # Insert bottle block after license line
+          sed -i '/^  bottle do$/,/^  end$/d' "Formula/${FORMULA}.rb"
           sed -i "/^  license/a\\
-          ${BOTTLE_BLOCK}" Formula/modastack.rb
+          ${BOTTLE_BLOCK}" "Formula/${FORMULA}.rb"
 
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add Formula/modastack.rb
-          git diff --staged --quiet || git commit -m "add bottles for modastack ${{ steps.version.outputs.version }}"
+          git add "Formula/${FORMULA}.rb"
+          git diff --staged --quiet || git commit -m "add bottles for ${FORMULA} ${VERSION} [skip ci]"
           git push
