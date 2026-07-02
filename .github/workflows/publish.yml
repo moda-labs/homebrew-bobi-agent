@@ -59,6 +59,7 @@ jobs:
             [ -e "$bottle" ] || continue
             mv "$bottle" "${bottle/${FORMULA}--/${FORMULA}-}"
           done
+          ls -la *.bottle.tar.gz
 
       - name: Create release and upload bottles
         env:
@@ -95,3 +96,34 @@ jobs:
           git add "Formula/${FORMULA}.rb"
           git diff --staged --quiet || git commit -m "add bottles for ${FORMULA} ${VERSION} [skip ci]"
           git push
+
+      - name: Smoke-check bottle URLs (release gate)
+        # Build the EXACT URL `brew install` will request for each bottled
+        # platform and HEAD-check it. A malformed tag or a filename-convention
+        # mismatch fails the publish here instead of reaching users.
+        run: |
+          FORMULA="${{ steps.version.outputs.formula }}"
+          VERSION="${{ steps.version.outputs.version }}"
+          ROOT_URL="https://github.com/moda-labs/homebrew-bobi-agent/releases/download/${FORMULA}-${VERSION}"
+          fail=0
+          for json in *.bottle.json; do
+            TAG_NAME=$(python3 -c "import json; d=json.load(open('$json')); k=list(d.keys())[0]; print(list(d[k]['bottle']['tags'].keys())[0])")
+            URL="${ROOT_URL}/${FORMULA}-${VERSION}.${TAG_NAME}.bottle.tar.gz"
+            CODE=""
+            # Asset propagation after upload can lag a few seconds; retry briefly.
+            for i in $(seq 1 6); do
+              CODE=$(curl -sIL -o /dev/null -w '%{http_code}' "$URL")
+              [ "$CODE" = "200" ] && break
+              sleep 5
+            done
+            if [ "$CODE" = "200" ]; then
+              echo "OK   $URL"
+            else
+              echo "::error::bottle URL not reachable (HTTP $CODE): $URL"
+              fail=1
+            fi
+          done
+          if [ "$fail" -ne 0 ]; then
+            echo "::error::One or more ${FORMULA} ${VERSION} bottle URLs are unreachable."
+            exit 1
+          fi
