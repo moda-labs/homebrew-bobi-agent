@@ -3,14 +3,9 @@ class Bobi < Formula
 
   desc "Event-driven AI agent framework"
   homepage "https://github.com/moda-labs/bobi-agent"
-  url "https://files.pythonhosted.org/packages/52/77/b27ad5f4766384a90ba28403c4f4ae4c7363057ffb1387bbd8687d073549/bobi-0.35.4.tar.gz"
-  sha256 "18523c472e0a6b9b166b1578293515f9fdf9fb1e4f9b2f00b72b97a260affdc4"
+  url "https://files.pythonhosted.org/packages/63/22/156aeb7003e9ae4fe334f9398843a492988b65ecb9da615336abf870a997/bobi-0.36.0.tar.gz"
+  sha256 "ebe14d80fdcaa3507210823fa03a1b9bd48d49706d5712def205a0ee667c5093"
   license "MIT"
-  bottle do
-    root_url "https://github.com/moda-labs/homebrew-bobi-agent/releases/download/bobi-0.35.4"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "e845a98565215076c08ed8b7a37bc4d1a7c7c5115d0de61006cc16516c3820cd"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma: "1d1acd3ba7e3d83caab6565ca9f714eaa15edbbbe91e39755aa0374463952f85"
-  end
 
   depends_on "maturin" => :build
   depends_on "rust" => :build
@@ -67,8 +62,8 @@ class Bobi < Formula
   end
 
   resource "fastapi" do
-    url "https://files.pythonhosted.org/packages/8a/c9/5e8defe249899c0dc900643695fc07829a67fc88b4ff2cdb03fcbdbf5a4b/fastapi-0.138.1.tar.gz"
-    sha256 "96e3702dce09ee0dce48856135620d3d865ca684a79fe7513fd7b13a12f82862"
+    url "https://files.pythonhosted.org/packages/d3/af/a5f50ccfa659ec1802cb4ca842c23f06d906a8cc9aef6016a2caeea3d4ed/fastapi-0.139.0.tar.gz"
+    sha256 "99ab7b2d92223c76d6cf10757ab3f89d45b38267fc20b2a136cf02f6beac3145"
   end
 
   resource "h11" do
@@ -172,8 +167,8 @@ class Bobi < Formula
   end
 
   resource "rpds-py" do
-    url "https://files.pythonhosted.org/packages/2e/43/25a8dcd3feedd735039a8f0b5b7e3b118232b5eae288c4fd9ab200d41094/rpds_py-2026.5.1.tar.gz"
-    sha256 "07b24fea40541e28570e5b795a4a38fbdcd12550c06bd0748005ecc8116ca256"
+    url "https://files.pythonhosted.org/packages/aa/2a/9618a122aeb2a169a28b03889a2995fe297588964333d4a7d67bdf46e147/rpds_py-2026.6.3.tar.gz"
+    sha256 "1cebd1337c242e4ec2293e541f712b2da849b29f48f0c293684b71c0632625d4"
   end
 
   resource "setuptools" do
