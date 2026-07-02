@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Generate an updated Homebrew formula for modastack.
+"""Generate an updated Homebrew formula for bobi.
 
 Usage: python3 update-formula.py <version>
 
-Installs modastack, discovers all dependencies via pip freeze, fetches
+Installs bobi, discovers all dependencies via pip freeze, fetches
 sdist URLs from PyPI, and generates a complete formula with resource
 blocks. Rust-based resources are installed with build_isolation: false
 to use the system maturin.
@@ -13,8 +13,9 @@ import subprocess
 import sys
 import urllib.request
 
+PACKAGE = "bobi"
 RUST_RESOURCES = {"pydantic-core", "watchfiles", "rpds-py", "cryptography"}
-SKIP_PACKAGES = {"modastack", "pip", "wheel", "maturin"}
+SKIP_PACKAGES = {PACKAGE, "pip", "wheel", "maturin"}
 
 
 def get_pypi_sdist(name, version):
@@ -64,9 +65,9 @@ def main():
                 packages["setuptools"] = line.split(":", 1)[1].strip()
                 break
 
-    mod_url, mod_sha = get_pypi_sdist("modastack", version)
+    mod_url, mod_sha = get_pypi_sdist(PACKAGE, version)
     if not mod_url:
-        print(f"ERROR: no sdist for modastack {version}", file=sys.stderr)
+        print(f"ERROR: no sdist for {PACKAGE} {version}", file=sys.stderr)
         sys.exit(1)
 
     resource_blocks = []
@@ -94,11 +95,11 @@ def main():
     resources_text = "\n\n".join(resource_blocks)
     rust_list = ", ".join(f'"{n}"' for n in sorted(rust_names))
 
-    formula = f'''class Modastack < Formula
+    formula = f'''class Bobi < Formula
   include Language::Python::Virtualenv
 
   desc "Event-driven AI agent framework"
-  homepage "https://github.com/moda-labs/modastack"
+  homepage "https://github.com/moda-labs/bobi-agent"
   url "{mod_url}"
   sha256 "{mod_sha}"
   license "MIT"
@@ -128,7 +129,7 @@ def main():
   end
 
   test do
-    assert_match "Usage", shell_output("#{{bin}}/modastack --help")
+    assert_match "Usage", shell_output("#{{bin}}/bobi --help")
   end
 end
 '''

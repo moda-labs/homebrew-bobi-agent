@@ -7,7 +7,9 @@ on:
 
 jobs:
   publish:
-    if: github.event.workflow_run.conclusion == 'success'
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'workflow_run'
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -23,27 +25,39 @@ jobs:
 
       - name: Extract version
         id: version
-        # Bottle files are named `modastack--<version>.<os_tag>.bottle.tar.gz`
-        # (e.g. modastack--0.33.0.arm64_sequoia.bottle.tar.gz). Strip the
-        # `modastack-`/`modastack--` prefix and the `.<os_tag>.bottle.tar.gz`
-        # suffix to recover just `<version>`. The previous extraction used a
-        # greedy `.*` that captured everything up to the LAST dot, leaking the
-        # OS/bottle suffix into the version (and thus into the release TAG and
-        # bottle root_url) — see moda-labs/modastack#493.
         run: |
-          VERSION=$(ls *.bottle.tar.gz | head -1 \
-            | sed -E 's/^modastack-{1,2}//; s/\.[a-z0-9_]+\.bottle\.tar\.gz$//')
-          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          from pathlib import Path
+          import re
+          import sys
 
-      - name: Rename bottles to the canonical (single-dash) filename
-        # `brew bottle` writes local files with a DOUBLE dash
-        # (modastack--<v>...), but `brew install` from a GitHub *Releases*
-        # root_url requests the SINGLE-dash form (modastack-<v>...). Upload the
-        # name brew actually fetches, or the install 404s — moda-labs/modastack#493.
+          versions = set()
+          formulae = set()
+          for bottle in Path(".").glob("*.bottle.tar.gz"):
+              match = re.match(r"^(?P<formula>.+)--(?P<version>.+?)\.[^.]+\.bottle\.tar\.gz$", bottle.name)
+              if not match:
+                  print(f"Unexpected bottle filename: {bottle.name}", file=sys.stderr)
+                  sys.exit(1)
+              formulae.add(match.group("formula"))
+              versions.add(match.group("version"))
+
+          if len(formulae) != 1 or len(versions) != 1:
+              print(
+                  f"Expected exactly one formula/version, found formulae={sorted(formulae)} versions={sorted(versions)}",
+                  file=sys.stderr,
+              )
+              sys.exit(1)
+
+          print(f"formula={formulae.pop()}")
+          print(f"version={versions.pop()}")
+          PY
+
+      - name: Normalize bottle asset names
         run: |
-          for f in modastack--*.bottle.tar.gz; do
-            [ -e "$f" ] || continue
-            mv "$f" "${f/modastack--/modastack-}"
+          FORMULA="${{ steps.version.outputs.formula }}"
+          for bottle in "${FORMULA}"--*.bottle.tar.gz; do
+            [ -e "$bottle" ] || continue
+            mv "$bottle" "${bottle/${FORMULA}--/${FORMULA}-}"
           done
           ls -la *.bottle.tar.gz
 
@@ -51,14 +65,18 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          TAG="modastack-${{ steps.version.outputs.version }}"
-          gh release create "$TAG" --title "$TAG" --notes "Bottles for modastack ${{ steps.version.outputs.version }}" modastack-*.bottle.tar.gz || \
-          gh release upload "$TAG" modastack-*.bottle.tar.gz --clobber
+          FORMULA="${{ steps.version.outputs.formula }}"
+          VERSION="${{ steps.version.outputs.version }}"
+          TAG="${FORMULA}-${VERSION}"
+          gh release create "$TAG" --title "$TAG" --notes "Bottles for ${FORMULA} ${VERSION}" *.bottle.tar.gz || \
+          gh release upload "$TAG" *.bottle.tar.gz --clobber
 
       - name: Update formula with bottle block
         run: |
-          TAG="modastack-${{ steps.version.outputs.version }}"
-          ROOT_URL="https://github.com/moda-labs/homebrew-modastack/releases/download/${TAG}"
+          FORMULA="${{ steps.version.outputs.formula }}"
+          VERSION="${{ steps.version.outputs.version }}"
+          TAG="${FORMULA}-${VERSION}"
+          ROOT_URL="https://github.com/moda-labs/homebrew-bobi-agent/releases/download/${TAG}"
 
           BOTTLE_BLOCK="  bottle do\n    root_url \"${ROOT_URL}\"\n"
           for json in *.bottle.json; do
@@ -69,30 +87,28 @@ jobs:
           done
           BOTTLE_BLOCK="${BOTTLE_BLOCK}  end"
 
-          # Remove existing bottle block if present
-          sed -i '/^  bottle do$/,/^  end$/d' Formula/modastack.rb
-          # Insert bottle block after license line
+          sed -i '/^  bottle do$/,/^  end$/d' "Formula/${FORMULA}.rb"
           sed -i "/^  license/a\\
-          ${BOTTLE_BLOCK}" Formula/modastack.rb
+          ${BOTTLE_BLOCK}" "Formula/${FORMULA}.rb"
 
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add Formula/modastack.rb
-          git diff --staged --quiet || git commit -m "add bottles for modastack ${{ steps.version.outputs.version }}"
+          git add "Formula/${FORMULA}.rb"
+          git diff --staged --quiet || git commit -m "add bottles for ${FORMULA} ${VERSION} [skip ci]"
           git push
 
       - name: Smoke-check bottle URLs (release gate)
         # Build the EXACT URL `brew install` will request for each bottled
         # platform and HEAD-check it. A malformed tag or a filename-convention
-        # mismatch fails the publish here instead of reaching users —
-        # moda-labs/modastack#493.
+        # mismatch fails the publish here instead of reaching users.
         run: |
+          FORMULA="${{ steps.version.outputs.formula }}"
           VERSION="${{ steps.version.outputs.version }}"
-          ROOT_URL="https://github.com/moda-labs/homebrew-modastack/releases/download/modastack-${VERSION}"
+          ROOT_URL="https://github.com/moda-labs/homebrew-bobi-agent/releases/download/${FORMULA}-${VERSION}"
           fail=0
           for json in *.bottle.json; do
             TAG_NAME=$(python3 -c "import json; d=json.load(open('$json')); k=list(d.keys())[0]; print(list(d[k]['bottle']['tags'].keys())[0])")
-            URL="${ROOT_URL}/modastack-${VERSION}.${TAG_NAME}.bottle.tar.gz"
+            URL="${ROOT_URL}/${FORMULA}-${VERSION}.${TAG_NAME}.bottle.tar.gz"
             CODE=""
             # Asset propagation after upload can lag a few seconds; retry briefly.
             for i in $(seq 1 6); do
@@ -108,6 +124,6 @@ jobs:
             fi
           done
           if [ "$fail" -ne 0 ]; then
-            echo "::error::One or more modastack ${VERSION} bottle URLs are unreachable — see moda-labs/modastack#493."
+            echo "::error::One or more ${FORMULA} ${VERSION} bottle URLs are unreachable."
             exit 1
           fi

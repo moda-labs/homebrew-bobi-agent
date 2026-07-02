@@ -6,12 +6,12 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: "PyPI version to update to (e.g. 0.9.3)"
+        description: "PyPI version to update to (e.g. 0.35.0)"
         required: true
 
 jobs:
   update:
-    runs-on: ubuntu-latest
+    runs-on: macos-15
     permissions:
       contents: write
     steps:
@@ -34,30 +34,31 @@ jobs:
         run: |
           VERSION="${{ steps.version.outputs.version }}"
           for i in $(seq 1 10); do
-            if pip index versions modastack 2>/dev/null | grep -q "$VERSION"; then
-              echo "modastack $VERSION available on PyPI"
+            if pip index versions bobi 2>/dev/null | grep -q "$VERSION"; then
+              echo "bobi $VERSION available on PyPI"
               exit 0
             fi
             echo "Waiting for PyPI... ($i/10)"
             sleep 30
           done
-          echo "::error::modastack $VERSION not found on PyPI"
+          echo "::error::bobi $VERSION not found on PyPI"
           exit 1
 
       - name: Generate updated formula
         run: |
           VERSION="${{ steps.version.outputs.version }}"
-          pip install "modastack==${VERSION}"
-          python3 scripts/update-formula.py "$VERSION" > Formula/modastack.rb
+          pip install "bobi==${VERSION}"
+          mkdir -p Formula
+          python3 scripts/update-formula.py "$VERSION" > Formula/bobi.rb
           echo "--- Generated formula ---"
-          cat Formula/modastack.rb
+          cat Formula/bobi.rb
 
       - name: Push to main
         run: |
           VERSION="${{ steps.version.outputs.version }}"
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add Formula/modastack.rb
+          git add -A Formula
           git diff --staged --quiet && { echo "No changes"; exit 0; }
-          git commit -m "modastack ${VERSION}"
+          git commit -m "bobi ${VERSION}"
           git push

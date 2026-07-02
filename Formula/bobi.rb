@@ -1,15 +1,15 @@
-class Modastack < Formula
+class Bobi < Formula
   include Language::Python::Virtualenv
 
   desc "Event-driven AI agent framework"
-  homepage "https://github.com/moda-labs/modastack"
-  url "https://files.pythonhosted.org/packages/ce/5c/18a95111e7cdbc5d513aca32de60cb60c8154f7eb7ecbee8e49ce5bc0709/modastack-0.33.0.tar.gz"
-  sha256 "449c4b50a23824953cd1422ccabf6457da55ac2d2a44be22398c278c9744a460"
+  homepage "https://github.com/moda-labs/bobi-agent"
+  url "https://files.pythonhosted.org/packages/4d/24/152f80303181cbdb8f52d81dd7b95206423ca783b7e338fab8915c161063/bobi-0.37.0.tar.gz"
+  sha256 "d42afabbc3459f1b9707bf1502484e0d0d21026cf5cc7dd96ccb125e0df7deb5"
   license "MIT"
   bottle do
-    root_url "https://github.com/moda-labs/homebrew-modastack/releases/download/modastack-0.33.0"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "2090ed301a53f762ae7bea8f6b61fe3ef0cc81f94f8b924dd9afac2e2ff05e97"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma: "d8012b3fd99a62b8e7b432dfc44e33a4d510323e634e8628ba4decdeac59d967"
+    root_url "https://github.com/moda-labs/homebrew-bobi-agent/releases/download/bobi-0.37.0"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "c9044244839459ef71c9e067c7ff000f0d473a270911ed5c4d4e0f6f00c26edc"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma: "848aa355fdc197052e1da4581ecfef21c0fa6478db4ce3ab8def6ea73203d485"
   end
 
   depends_on "maturin" => :build
@@ -67,8 +67,8 @@ class Modastack < Formula
   end
 
   resource "fastapi" do
-    url "https://files.pythonhosted.org/packages/5b/58/ff455d9fe47c60abadb34b9e05a304b1f05f5ab8000ac01565156b6f5e43/fastapi-0.138.0.tar.gz"
-    sha256 "d445a4877636ad191e7053e08c9bf98cb921a6756776848400bb773d1740c061"
+    url "https://files.pythonhosted.org/packages/d3/af/a5f50ccfa659ec1802cb4ca842c23f06d906a8cc9aef6016a2caeea3d4ed/fastapi-0.139.0.tar.gz"
+    sha256 "99ab7b2d92223c76d6cf10757ab3f89d45b38267fc20b2a136cf02f6beac3145"
   end
 
   resource "h11" do
@@ -122,8 +122,8 @@ class Modastack < Formula
   end
 
   resource "mcp" do
-    url "https://files.pythonhosted.org/packages/c1/ee/94c6c50ffc5b5cf4737052275d11b57367f32d1a8516e31dcd60591b3916/mcp-1.28.0.tar.gz"
-    sha256 "559d3f9943674cafbe5744c5d3794f3237e8b47f9bbc58e20c0fad680d8487c2"
+    url "https://files.pythonhosted.org/packages/6e/77/9450b8f251a13affb6281997d0523c4615f8a8b35d0b21ff30db3a5aac9d/mcp-1.28.1.tar.gz"
+    sha256 "d51e36a5f5644faea4f85ea649bfffa6bc6c26770d42798ad6a3de3d2ba69683"
   end
 
   resource "pycparser" do
@@ -172,8 +172,8 @@ class Modastack < Formula
   end
 
   resource "rpds-py" do
-    url "https://files.pythonhosted.org/packages/2e/43/25a8dcd3feedd735039a8f0b5b7e3b118232b5eae288c4fd9ab200d41094/rpds_py-2026.5.1.tar.gz"
-    sha256 "07b24fea40541e28570e5b795a4a38fbdcd12550c06bd0748005ecc8116ca256"
+    url "https://files.pythonhosted.org/packages/aa/2a/9618a122aeb2a169a28b03889a2995fe297588964333d4a7d67bdf46e147/rpds_py-2026.6.3.tar.gz"
+    sha256 "1cebd1337c242e4ec2293e541f712b2da849b29f48f0c293684b71c0632625d4"
   end
 
   resource "setuptools" do
@@ -255,6 +255,6 @@ class Modastack < Formula
   end
 
   test do
-    assert_match "Usage", shell_output("#{bin}/modastack --help")
+    assert_match "Usage", shell_output("#{bin}/bobi --help")
   end
 end

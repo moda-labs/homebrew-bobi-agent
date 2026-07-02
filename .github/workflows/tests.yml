@@ -7,8 +7,8 @@ on:
   workflow_dispatch:
     inputs:
       formula:
-        description: "Formula to bottle (e.g. modastack)"
-        default: "modastack"
+        description: "Formula to bottle (e.g. bobi)"
+        default: "bobi"
 
 jobs:
   bottle:
@@ -24,16 +24,33 @@ jobs:
 
       - name: Set up Homebrew
         run: |
-          brew tap moda-labs/modastack "$(pwd)"
+          brew tap moda-labs/bobi-agent "$(pwd)"
+
+      - name: Select formula
+        id: formula
+        run: |
+          FORMULA="${{ github.event.inputs.formula }}"
+          if [ -z "$FORMULA" ]; then
+            FORMULA=bobi
+          fi
+          echo "formula=$FORMULA" >> "$GITHUB_OUTPUT"
+          if [ -f "Formula/${FORMULA}.rb" ]; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+            echo "Formula/${FORMULA}.rb does not exist."
+            exit 1
+          fi
 
       - name: Build bottle
         run: |
-          brew install --build-bottle --verbose moda-labs/modastack/modastack 2>&1 || {
+          FORMULA="${{ steps.formula.outputs.formula }}"
+          brew install --build-bottle --verbose "moda-labs/bobi-agent/${FORMULA}" 2>&1 || {
             echo "=== Homebrew install failed. Dumping logs ==="
-            find ~/Library/Logs/Homebrew/modastack/ -type f -exec echo "--- {} ---" \; -exec cat {} \; 2>/dev/null
+            find ~/Library/Logs/Homebrew/"${FORMULA}"/ -type f -exec echo "--- {} ---" \; -exec cat {} \; 2>/dev/null
             exit 1
           }
-          brew bottle --no-rebuild --json moda-labs/modastack/modastack
+          brew bottle --no-rebuild --json "moda-labs/bobi-agent/${FORMULA}"
           ls -la *.bottle.*
 
       - name: Upload bottle
