@@ -3,14 +3,9 @@ class Bobi < Formula
 
   desc "Event-driven AI agent framework"
   homepage "https://github.com/moda-labs/bobi-agent"
-  url "https://files.pythonhosted.org/packages/4d/24/152f80303181cbdb8f52d81dd7b95206423ca783b7e338fab8915c161063/bobi-0.37.0.tar.gz"
-  sha256 "d42afabbc3459f1b9707bf1502484e0d0d21026cf5cc7dd96ccb125e0df7deb5"
+  url "https://files.pythonhosted.org/packages/b8/46/ef0853b05e103794984dfff3ccf93f8f42abb626dec7713581bdd81505f2/bobi-0.38.0.tar.gz"
+  sha256 "afa71f7246faa88064e7b90915293ebc3a787355ec916160299af6c2a1aed380"
   license "MIT"
-  bottle do
-    root_url "https://github.com/moda-labs/homebrew-bobi-agent/releases/download/bobi-0.37.0"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "c9044244839459ef71c9e067c7ff000f0d473a270911ed5c4d4e0f6f00c26edc"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma: "848aa355fdc197052e1da4581ecfef21c0fa6478db4ce3ab8def6ea73203d485"
-  end
 
   depends_on "maturin" => :build
   depends_on "rust" => :build
@@ -32,8 +27,8 @@ class Bobi < Formula
   end
 
   resource "apsw" do
-    url "https://files.pythonhosted.org/packages/df/8e/6db1f1b21e461bb77b455bc20ff8ab5fb9642ff8370338743dd812483f8d/apsw-3.53.2.0.tar.gz"
-    sha256 "5c59bde36e20a33c0a0399bfe4021f2cd6fc049ac1b15d58f0dc25b48ed1d87f"
+    url "https://files.pythonhosted.org/packages/8f/f5/bdde3d1b141038e6113254317e4414989cd0a1a6fce570a02badd88d3d70/apsw-3.53.3.0.tar.gz"
+    sha256 "88a1ba5db8f279b1561b22ac2d70691416f4a271a9ed433ebf03be6c1755d4fd"
   end
 
   resource "attrs" do
@@ -207,8 +202,8 @@ class Bobi < Formula
   end
 
   resource "typing_extensions" do
-    url "https://files.pythonhosted.org/packages/72/94/1a15dd82efb362ac84269196e94cf00f187f7ed21c242792a923cdb1c61f/typing_extensions-4.15.0.tar.gz"
-    sha256 "0cea48d173cc12fa28ecabc3b837ea3cf6f38c6d1136f85cbaaf598984861466"
+    url "https://files.pythonhosted.org/packages/f6/cc/6253133b5bb138fc3306cebfbda2c520f545d36b5be2c7255cc528bb45d6/typing_extensions-4.16.0.tar.gz"
+    sha256 "dc983d19a509c94dba722ee6abd33940f7c05a89e243c47e907eb4db6f1a43e5"
   end
 
   resource "uvicorn" do
