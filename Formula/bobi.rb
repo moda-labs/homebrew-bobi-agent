@@ -6,11 +6,6 @@ class Bobi < Formula
   url "https://files.pythonhosted.org/packages/b8/46/ef0853b05e103794984dfff3ccf93f8f42abb626dec7713581bdd81505f2/bobi-0.38.0.tar.gz"
   sha256 "afa71f7246faa88064e7b90915293ebc3a787355ec916160299af6c2a1aed380"
   license "MIT"
-  bottle do
-    root_url "https://github.com/moda-labs/homebrew-bobi-agent/releases/download/bobi-0.38.0"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "2dad5bbbac20bbc23d48ce148b5457500b35e428b0d70184e5e718bf411d0e13"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma: "d6fa20e969763a56684df64ec74f6569c3a31d932305c1f4ee49f4048877f3d6"
-  end
 
   depends_on "maturin" => :build
   depends_on "rust" => :build
@@ -177,8 +172,8 @@ class Bobi < Formula
   end
 
   resource "setuptools" do
-    url "https://files.pythonhosted.org/packages/4f/db/cfac1baf10650ab4d1c111714410d2fbb77ac5a616db26775db562c8fab2/setuptools-82.0.1.tar.gz"
-    sha256 "7d872682c5d01cfde07da7bccc7b65469d3dca203318515ada1de5eda35efbf9"
+    url "https://files.pythonhosted.org/packages/34/26/f5d29e25ffdb535afef2d35cdb55b325298f96debd670da4c325e08d70f4/setuptools-83.0.0.tar.gz"
+    sha256 "025bccbbf0fa05b6192bc64ae1e7b16e001fd6d6d4d5de03c97b1c1ade523bef"
   end
 
   resource "sniffio" do
@@ -212,8 +207,8 @@ class Bobi < Formula
   end
 
   resource "uvicorn" do
-    url "https://files.pythonhosted.org/packages/c4/1f/fa18009dea8469069cca78a4e877a008ab78f08b064bfc9ab891579077ff/uvicorn-0.49.0.tar.gz"
-    sha256 "ebf4271aa580d9de97f93192d4595176df6e91f9aae919ca73e4fc07df1e66a3"
+    url "https://files.pythonhosted.org/packages/2e/41/06cce5dbb9f77591512957710ac709e60b12e6216a2f2d0d607fd49706e8/uvicorn-0.50.0.tar.gz"
+    sha256 "0c92e1bc2259cb7faa4fcef774a5966588f2e88542744550b66799fba10b76f1"
   end
 
   resource "uvloop" do
