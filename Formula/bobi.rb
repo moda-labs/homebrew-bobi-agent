@@ -3,14 +3,9 @@ class Bobi < Formula
 
   desc "Event-driven AI agent framework"
   homepage "https://github.com/moda-labs/bobi-agent"
-  url "https://files.pythonhosted.org/packages/a9/8d/04ba55c046f2dcf8cd96d192329d1277a5e7047a2e7e35feca6644640c95/bobi-0.39.0.tar.gz"
-  sha256 "52e83ea6598bbb6935cf52bc3e5a809dbc839064102c1f7fe9c45768163c89f9"
+  url "https://files.pythonhosted.org/packages/b2/e5/81696be2c4fa8d94b3475917ae28f6762235c96bb12816cd90c126ad6e9f/bobi-0.40.0.tar.gz"
+  sha256 "a78d669b7e8695e40a2a9d66a87a02e0529575b718081532d40006f5c094ff33"
   license "MIT"
-  bottle do
-    root_url "https://github.com/moda-labs/homebrew-bobi-agent/releases/download/bobi-0.39.0"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "25fda44a1ff5781f6f7fafe5b2a14b0965ae473b920758001b394d5c72fa9c6a"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma: "0e9072b7febba15ab8614c25d209c7b6bdf6707d76adbb21973ce2452d0657d9"
-  end
 
   depends_on "maturin" => :build
   depends_on "rust" => :build
@@ -47,13 +42,13 @@ class Bobi < Formula
   end
 
   resource "cffi" do
-    url "https://files.pythonhosted.org/packages/eb/56/b1ba7935a17738ae8453301356628e8147c79dbb825bcbc73dc7401f9846/cffi-2.0.0.tar.gz"
-    sha256 "44d1b5909021139fe36001ae048dbdde8214afa20200eda0f64c068cac5d5529"
+    url "https://files.pythonhosted.org/packages/57/5f/ff100cae70ebe9d8df1c01a00e510e45d9adb5c1fdda84791b199141de97/cffi-2.1.0.tar.gz"
+    sha256 "efc1cdd798b1aaf39b4610bba7aad28c9bea9b910f25c784ccf9ec1fa719d1f9"
   end
 
   resource "claude-agent-sdk" do
-    url "https://files.pythonhosted.org/packages/bb/98/8fdab35ed9e1a36bc7afab4d390cc5002094a4950996c079da9aa4541cc4/claude_agent_sdk-0.2.110.tar.gz"
-    sha256 "538b548bac07a22f65686abab063a902ac76ba35989d0f073c942f96248e9fa3"
+    url "https://files.pythonhosted.org/packages/77/d7/e119e2e0748bf857e71b46ed35459385ec82c7df0f8511a4f83c734e2949/claude_agent_sdk-0.2.113.tar.gz"
+    sha256 "b78bbd5b4562b65ea80c3c843f247213fc6052c32b1b3ebbe80883dabdf7b719"
   end
 
   resource "click" do
@@ -212,8 +207,8 @@ class Bobi < Formula
   end
 
   resource "uvicorn" do
-    url "https://files.pythonhosted.org/packages/2e/41/06cce5dbb9f77591512957710ac709e60b12e6216a2f2d0d607fd49706e8/uvicorn-0.50.0.tar.gz"
-    sha256 "0c92e1bc2259cb7faa4fcef774a5966588f2e88542744550b66799fba10b76f1"
+    url "https://files.pythonhosted.org/packages/9f/f6/cc9aadc0e481344a42095d222bfa764122fb8cfba708d1922917bd8bfb01/uvicorn-0.50.2.tar.gz"
+    sha256 "b92bf03509b82bcb9d49e7335b4fd364518ad021c2dc18b4e6a2fec8c955a0bb"
   end
 
   resource "uvloop" do
