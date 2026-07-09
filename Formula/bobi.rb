@@ -3,14 +3,9 @@ class Bobi < Formula
 
   desc "Event-driven AI agent framework"
   homepage "https://github.com/moda-labs/bobi-agent"
-  url "https://files.pythonhosted.org/packages/b2/e5/81696be2c4fa8d94b3475917ae28f6762235c96bb12816cd90c126ad6e9f/bobi-0.40.0.tar.gz"
-  sha256 "a78d669b7e8695e40a2a9d66a87a02e0529575b718081532d40006f5c094ff33"
+  url "https://files.pythonhosted.org/packages/15/41/ac99ed00161a950575da7b160eae10e65e686a6aada0e642368aa3fe48d2/bobi-0.41.0.tar.gz"
+  sha256 "533d6fb7ae7d6b94fdb6329f0389b671b7490d3f86c9c0ab97f5eaa7a3e1500f"
   license "MIT"
-  bottle do
-    root_url "https://github.com/moda-labs/homebrew-bobi-agent/releases/download/bobi-0.40.0"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "5d2708c59c6087b26c7a5d1c25b921b40c89056e86fed104e0789f687224e807"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma: "987c4a6cd1d1686c4f0f86d6ac3499354c699328c2229a4ddc07cee5e7e748c6"
-  end
 
   depends_on "maturin" => :build
   depends_on "rust" => :build
@@ -52,8 +47,8 @@ class Bobi < Formula
   end
 
   resource "claude-agent-sdk" do
-    url "https://files.pythonhosted.org/packages/77/d7/e119e2e0748bf857e71b46ed35459385ec82c7df0f8511a4f83c734e2949/claude_agent_sdk-0.2.113.tar.gz"
-    sha256 "b78bbd5b4562b65ea80c3c843f247213fc6052c32b1b3ebbe80883dabdf7b719"
+    url "https://files.pythonhosted.org/packages/c6/f3/a74b32b52f3c0013e317afe27b44946b9bbceb16b53c2a8d9614bfc0e7ad/claude_agent_sdk-0.2.114.tar.gz"
+    sha256 "53263a25bddd52b354ba2975b348cc978493bf29cb21a8c74a1b92b06f88faa3"
   end
 
   resource "click" do
@@ -212,8 +207,8 @@ class Bobi < Formula
   end
 
   resource "uvicorn" do
-    url "https://files.pythonhosted.org/packages/9f/f6/cc9aadc0e481344a42095d222bfa764122fb8cfba708d1922917bd8bfb01/uvicorn-0.50.2.tar.gz"
-    sha256 "b92bf03509b82bcb9d49e7335b4fd364518ad021c2dc18b4e6a2fec8c955a0bb"
+    url "https://files.pythonhosted.org/packages/a2/65/b7c6c443ccc58678c91e1e973bbe2a878591538655d6e1d47f24ba1c51f3/uvicorn-0.51.0.tar.gz"
+    sha256 "f6f4b69b657c312f516dd2d268ab9ae6f254b11e4bac504f37b2ab58b24dd0b0"
   end
 
   resource "uvloop" do
