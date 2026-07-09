@@ -16,15 +16,39 @@ jobs:
       github.event_name == 'workflow_dispatch' ||
       github.event.workflow_run.conclusion == 'success'
     strategy:
+      fail-fast: false
       matrix:
         os: [macos-15, macos-14]
     runs-on: ${{ matrix.os }}
+    # Harden cargo network access against transient crates.io flakes (e.g.
+    # "curl [16] Error in the HTTP2 framing layer") that abort the maturin
+    # builds of Rust-backed resources (cryptography, pydantic-core, ...).
+    env:
+      CARGO_NET_RETRY: "10"
+      CARGO_HTTP_MULTIPLEXING: "false"
     steps:
       - uses: actions/checkout@v4
 
       - name: Set up Homebrew
         run: |
           brew tap moda-labs/bobi-agent "$(pwd)"
+
+      - name: Harden cargo network
+        run: |
+          # Homebrew's build sandbox may drop env vars, so also persist the
+          # retry/HTTP-1.1 settings to cargo's on-disk config, which cargo
+          # always reads. HTTP/2 multiplexing off avoids framing-layer errors;
+          # retry covers the rest of the transient download failures.
+          CARGO_DIR="${CARGO_HOME:-$HOME/.cargo}"
+          mkdir -p "$CARGO_DIR"
+          cat >> "$CARGO_DIR/config.toml" <<'EOF'
+
+          [net]
+          retry = 10
+
+          [http]
+          multiplexing = false
+          EOF
 
       - name: Select formula
         id: formula
