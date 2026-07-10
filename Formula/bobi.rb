@@ -6,6 +6,11 @@ class Bobi < Formula
   url "https://files.pythonhosted.org/packages/5c/ec/edc94c69bda3a1df47b65456018330c867e8949926396de53672df6347fc/bobi-0.43.0.tar.gz"
   sha256 "cbda5b6410f52379009d65e5bf454111a9d97401df69b822651a5eb440e6ab30"
   license "MIT"
+  bottle do
+    root_url "https://github.com/moda-labs/homebrew-bobi-agent/releases/download/bobi-0.43.0"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "80af9606d82e054a5dcb711220dfbf861e86d7c7689c61b30856d68c1e6d57e2"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma: "98cf04a46ec654b9bd983b230de3ac22597df8220a9cea829a75b0e7c4c7ddb9"
+  end
 
   depends_on "maturin" => :build
   depends_on "rust" => :build
