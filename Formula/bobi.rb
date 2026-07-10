@@ -3,14 +3,9 @@ class Bobi < Formula
 
   desc "Event-driven AI agent framework"
   homepage "https://github.com/moda-labs/bobi-agent"
-  url "https://files.pythonhosted.org/packages/6f/a4/322cb16b607693bfd84a72048f990a81d8eab5bca6ecbad74e9e02a651b6/bobi-0.42.0.tar.gz"
-  sha256 "2e899839ac9e1950992e48951e2ea1a973496b262d71663133973667cec04382"
+  url "https://files.pythonhosted.org/packages/5c/ec/edc94c69bda3a1df47b65456018330c867e8949926396de53672df6347fc/bobi-0.43.0.tar.gz"
+  sha256 "cbda5b6410f52379009d65e5bf454111a9d97401df69b822651a5eb440e6ab30"
   license "MIT"
-  bottle do
-    root_url "https://github.com/moda-labs/homebrew-bobi-agent/releases/download/bobi-0.42.0"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "07e13c63ea17bf21f8ba033d45f2dd14c11300d1dac44ce8362b8c7bd85ccd60"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma: "ab1fe3ce33dfacf7e275c943d4d1f623ab20164fb960a19110ffd84fc5b6cb25"
-  end
 
   depends_on "maturin" => :build
   depends_on "rust" => :build
@@ -232,8 +227,8 @@ class Bobi < Formula
   end
 
   resource "websockets" do
-    url "https://files.pythonhosted.org/packages/04/24/4b2031d72e840ce4c1ccb255f693b15c334757fc50023e4db9537080b8c4/websockets-16.0.tar.gz"
-    sha256 "5f6261a5e56e8d5c42a4497b364ea24d94d9563e8fbd44e78ac40879c60179b5"
+    url "https://files.pythonhosted.org/packages/8c/02/b9a097e1e16fee4e2fd1ec8c39f6a9c5d6257bae8fa12640caf869f54436/websockets-16.1.tar.gz"
+    sha256 "299468cbe42e2b9981134c7c51d99387d8a7bf562b00183b3eec53f882846dad"
   end
 
   def install
