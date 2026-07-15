@@ -3,14 +3,9 @@ class Bobi < Formula
 
   desc "Event-driven AI agent framework"
   homepage "https://github.com/moda-labs/bobi-agent"
-  url "https://files.pythonhosted.org/packages/5c/ec/edc94c69bda3a1df47b65456018330c867e8949926396de53672df6347fc/bobi-0.43.0.tar.gz"
-  sha256 "cbda5b6410f52379009d65e5bf454111a9d97401df69b822651a5eb440e6ab30"
+  url "https://files.pythonhosted.org/packages/a7/57/10ad792d66e605f31388dc0c61adef46d9c7bc1d90eb12491ea885d9a18b/bobi-0.44.0.tar.gz"
+  sha256 "184f32675cfe0233c42c9e5d7138ff4f5ce9f3ca39a448df365250d913dd85eb"
   license "MIT"
-  bottle do
-    root_url "https://github.com/moda-labs/homebrew-bobi-agent/releases/download/bobi-0.43.0"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "80af9606d82e054a5dcb711220dfbf861e86d7c7689c61b30856d68c1e6d57e2"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma: "98cf04a46ec654b9bd983b230de3ac22597df8220a9cea829a75b0e7c4c7ddb9"
-  end
 
   depends_on "maturin" => :build
   depends_on "rust" => :build
@@ -27,13 +22,13 @@ class Bobi < Formula
   end
 
   resource "anyio" do
-    url "https://files.pythonhosted.org/packages/3b/72/5562aabb8dd7181e8e860622a38bea08d17842b99ecd4c91f84ac95251b0/anyio-4.14.1.tar.gz"
-    sha256 "8d648a3544c1a700e3ff78615cd679e4c5c3f149904287e73687b2596963629e"
+    url "https://files.pythonhosted.org/packages/61/cc/a381afa6efea9f496eff839d4a6a1aed3bfafc7b3ab4b0d1b243a12573dd/anyio-4.14.2.tar.gz"
+    sha256 "cfa139f3ed1a23ee8f88a145ddb5ac7605b8bbfd8592baacd7ce3d8bb4313c7f"
   end
 
   resource "apsw" do
-    url "https://files.pythonhosted.org/packages/8f/f5/bdde3d1b141038e6113254317e4414989cd0a1a6fce570a02badd88d3d70/apsw-3.53.3.0.tar.gz"
-    sha256 "88a1ba5db8f279b1561b22ac2d70691416f4a271a9ed433ebf03be6c1755d4fd"
+    url "https://files.pythonhosted.org/packages/9a/2a/ec1dfda955cda4b8d77b076553b87d428315bd3a17ea4286aa9dc40901fe/apsw-3.53.3.1.tar.gz"
+    sha256 "7684d24e77dc9e3b301ee5374a8a9501ad8a85b821ce85391260a2448dd02323"
   end
 
   resource "attrs" do
@@ -52,8 +47,8 @@ class Bobi < Formula
   end
 
   resource "claude-agent-sdk" do
-    url "https://files.pythonhosted.org/packages/ba/b8/c1898153ffb0c75cfc5504c18d892d3c57a080073c9ede3df7addb8fc4a0/claude_agent_sdk-0.2.115.tar.gz"
-    sha256 "230017fbba74fb3aa1a1d86b2986277c7fe26dd2e33eea865c90553d93f4e26d"
+    url "https://files.pythonhosted.org/packages/49/5e/92e54d2024d7becdd56ab5d731c02566bbb393a3628fd522a6ba67049db1/claude_agent_sdk-0.2.119.tar.gz"
+    sha256 "aabbc8c0c1147ca07fd0406fd5e7da856af79d96b765eb13d8f520e75bc2c2ef"
   end
 
   resource "click" do
