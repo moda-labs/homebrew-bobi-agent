@@ -3,14 +3,9 @@ class Bobi < Formula
 
   desc "Event-driven AI agent framework"
   homepage "https://github.com/moda-labs/bobi-agent"
-  url "https://files.pythonhosted.org/packages/b9/df/c2d7015565fb3b37f32c7c43a83f9da39e6a1522d2ef9445d1014a9afc72/bobi-0.45.0.tar.gz"
-  sha256 "ceba35c1d2b31a27aeebad1fda6f1d5b0438c78e91aac76a60e2fc1c50630ed7"
+  url "https://files.pythonhosted.org/packages/91/5a/24e80d8873087d7f3f2f0e75e283271351c3fe43cb8c58717df9ff220bd4/bobi-0.46.0.tar.gz"
+  sha256 "5aec83e0d8676881fb785d66d534ee9c8ebb08f56a64840fb2dba8dd40393e5e"
   license "MIT"
-  bottle do
-    root_url "https://github.com/moda-labs/homebrew-bobi-agent/releases/download/bobi-0.45.0"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "0200a25f8b3db5c3c46b3f83841e619e0feb4c29fc9e25d1a6d7426b342fb154"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma: "c0d516e6db780b194a4ba5c0e5b8bc3a6cd604ff8ee55ff772b0d1179ddf3c92"
-  end
 
   depends_on "maturin" => :build
   depends_on "rust" => :build
@@ -52,8 +47,8 @@ class Bobi < Formula
   end
 
   resource "claude-agent-sdk" do
-    url "https://files.pythonhosted.org/packages/49/5e/92e54d2024d7becdd56ab5d731c02566bbb393a3628fd522a6ba67049db1/claude_agent_sdk-0.2.119.tar.gz"
-    sha256 "aabbc8c0c1147ca07fd0406fd5e7da856af79d96b765eb13d8f520e75bc2c2ef"
+    url "https://files.pythonhosted.org/packages/eb/7f/7b69aed292a4edecae132e4dbe6b6decb4e88ec142fc91d117b19058c9e0/claude_agent_sdk-0.2.120.tar.gz"
+    sha256 "e428552f79a76e0d85789369eeb58249b33f350200124e5fc86b24168bd00805"
   end
 
   resource "click" do
@@ -67,8 +62,8 @@ class Bobi < Formula
   end
 
   resource "fastapi" do
-    url "https://files.pythonhosted.org/packages/d3/af/a5f50ccfa659ec1802cb4ca842c23f06d906a8cc9aef6016a2caeea3d4ed/fastapi-0.139.0.tar.gz"
-    sha256 "99ab7b2d92223c76d6cf10757ab3f89d45b38267fc20b2a136cf02f6beac3145"
+    url "https://files.pythonhosted.org/packages/cd/95/d3f0ae10836324a2eab98a52b61210ac609f08200bf4bb0dc8132d32f78a/fastapi-0.139.2.tar.gz"
+    sha256 "333145a6891e9b5b3cfceb69baf817e8240cde4d4588ae5a10bf56ffacb6255e"
   end
 
   resource "h11" do
