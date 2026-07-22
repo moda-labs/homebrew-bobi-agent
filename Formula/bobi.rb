@@ -3,14 +3,9 @@ class Bobi < Formula
 
   desc "Event-driven AI agent framework"
   homepage "https://github.com/moda-labs/bobi-agent"
-  url "https://files.pythonhosted.org/packages/91/5a/24e80d8873087d7f3f2f0e75e283271351c3fe43cb8c58717df9ff220bd4/bobi-0.46.0.tar.gz"
-  sha256 "5aec83e0d8676881fb785d66d534ee9c8ebb08f56a64840fb2dba8dd40393e5e"
+  url "https://files.pythonhosted.org/packages/37/3b/9d893969cd01b21954b91fbe8d1e41bd92cb3f9613c5e2180cb58225a37f/bobi-0.47.0.tar.gz"
+  sha256 "2af627e0ea74d3f901fff46958fb2e478fffdebc0584daae39fe6d24485e0c27"
   license "MIT"
-  bottle do
-    root_url "https://github.com/moda-labs/homebrew-bobi-agent/releases/download/bobi-0.46.0"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "578b4aa69e38b2fa0a4e1cabfb628a211331b891be0c00a2bd4344d9a424b3fe"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma: "4f390a9953dc3ab4bee8f45210659f4b955e8091d271514c5465399bd2c4e44b"
-  end
 
   depends_on "maturin" => :build
   depends_on "rust" => :build
@@ -52,8 +47,8 @@ class Bobi < Formula
   end
 
   resource "claude-agent-sdk" do
-    url "https://files.pythonhosted.org/packages/eb/7f/7b69aed292a4edecae132e4dbe6b6decb4e88ec142fc91d117b19058c9e0/claude_agent_sdk-0.2.120.tar.gz"
-    sha256 "e428552f79a76e0d85789369eeb58249b33f350200124e5fc86b24168bd00805"
+    url "https://files.pythonhosted.org/packages/3b/34/45a8efc9f58768d323bdb7948e3d004e9655c107ac1ab2ca11a42106ee65/claude_agent_sdk-0.2.125.tar.gz"
+    sha256 "c59231b74f9bf5fb500977b01ae459f6c123eaca98aa7b47e91716fa78d48d4f"
   end
 
   resource "click" do
@@ -187,8 +182,8 @@ class Bobi < Formula
   end
 
   resource "sse-starlette" do
-    url "https://files.pythonhosted.org/packages/d2/1b/bc9e3e7a72dcdad7dc7888758f5d00f56f8909ed5cfdff822bd72bb4c520/sse_starlette-3.4.5.tar.gz"
-    sha256 "83072538bc211a2f68b7b0422226c4af3e9b62e106e07034664b832ca019842a"
+    url "https://files.pythonhosted.org/packages/6c/10/a34c656829ffc1c4b22ef36d70d9ebb6b99c020e2aeb17cee5485099f028/sse_starlette-3.4.6.tar.gz"
+    sha256 "725f8a1bd6d26ae1b2c9610c0ef5065dfdd496f3988d28adcf8c4b49dc25c627"
   end
 
   resource "starlette" do
@@ -232,8 +227,8 @@ class Bobi < Formula
   end
 
   resource "websockets" do
-    url "https://files.pythonhosted.org/packages/8c/02/b9a097e1e16fee4e2fd1ec8c39f6a9c5d6257bae8fa12640caf869f54436/websockets-16.1.tar.gz"
-    sha256 "299468cbe42e2b9981134c7c51d99387d8a7bf562b00183b3eec53f882846dad"
+    url "https://files.pythonhosted.org/packages/21/f7/bc3a25c5ec26ce62ce487690becc2f3710bbc7b33338f005ad390db0b986/websockets-16.1.1.tar.gz"
+    sha256 "db234eda965dcce15df96bb9709f587cd87d4d52aaf0e80e2f34ec04c7670c57"
   end
 
   def install
