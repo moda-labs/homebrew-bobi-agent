@@ -82,6 +82,24 @@ class BottleWorkflowTests(unittest.TestCase):
         self.assertIn("--sdist-url", render_step)
         self.assertIn("--sdist-sha256", render_step)
 
+    def test_candidate_formula_replaces_formula_in_tapped_checkout(self):
+        workflow = BOTTLE_WORKFLOW_PATH.read_text()
+        setup_header = "      - name: Set up Homebrew"
+        render_header = "      - name: Render unpublished candidate formula"
+        render_step = yaml_block(workflow, render_header)
+
+        self.assertLess(workflow.index(setup_header), workflow.index(render_header))
+        self.assertIn(
+            'TAP_FORMULA="$(brew --repo moda-labs/bobi-agent)/Formula/bobi.rb"',
+            render_step,
+        )
+        self.assertIn('> "$TAP_FORMULA"', render_step)
+        self.assertNotIn("> Formula/bobi.rb", render_step)
+        self.assertIn(
+            "grep -Fq 'from bobi.events.server import ensure_running'",
+            render_step,
+        )
+
     def test_candidate_checksum_mismatch_stops_before_install(self):
         workflow = BOTTLE_WORKFLOW_PATH.read_text()
         render_script = yaml_run_script(

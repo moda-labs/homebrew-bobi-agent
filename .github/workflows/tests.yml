@@ -59,6 +59,10 @@ jobs:
         with:
           python-version: "3.13"
 
+      - name: Set up Homebrew
+        run: |
+          brew tap moda-labs/bobi-agent "$(pwd)"
+
       - name: Render unpublished candidate formula
         if: >-
           github.event_name == 'workflow_dispatch' &&
@@ -89,14 +93,13 @@ jobs:
             "$GENERATOR_PYTHON" -c \
               'from importlib.metadata import version; print(version("bobi"))'
           )"
+          TAP_FORMULA="$(brew --repo moda-labs/bobi-agent)/Formula/bobi.rb"
           "$GENERATOR_PYTHON" scripts/update-formula.py "$VERSION" \
             --sdist-url "$CANDIDATE_SDIST_URL" \
             --sdist-sha256 "$CANDIDATE_SDIST_SHA256" \
-            > Formula/bobi.rb
-
-      - name: Set up Homebrew
-        run: |
-          brew tap moda-labs/bobi-agent "$(pwd)"
+            > "$TAP_FORMULA"
+          grep -Fq 'depends_on "node"' "$TAP_FORMULA"
+          grep -Fq 'from bobi.events.server import ensure_running' "$TAP_FORMULA"
 
       - name: Select formula
         id: formula
