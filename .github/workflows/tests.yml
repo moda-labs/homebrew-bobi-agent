@@ -1,6 +1,7 @@
 name: Build bottles
 
 on:
+  pull_request:
   workflow_run:
     workflows: ["Update Homebrew formula"]
     types: [completed]
@@ -9,9 +10,39 @@ on:
       formula:
         description: "Formula to bottle (e.g. bobi)"
         default: "bobi"
+      candidate_sdist_url:
+        description: "Optional unpublished Bobi sdist URL"
+        required: false
+      candidate_sdist_sha256:
+        description: "SHA-256 for candidate_sdist_url"
+        required: false
+
+permissions:
+  contents: read
 
 jobs:
+  generator-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+
+      - name: Test formula generator contracts
+        env:
+          PYTHONDONTWRITEBYTECODE: "1"
+        run: python3 -m unittest discover -s tests -v
+
   bottle:
+    needs: generator-tests
     if: >-
       github.event_name == 'workflow_dispatch' ||
       github.event.workflow_run.conclusion == 'success'
@@ -21,6 +52,47 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Render unpublished candidate formula
+        if: >-
+          github.event_name == 'workflow_dispatch' &&
+          (github.event.inputs.candidate_sdist_url != '' ||
+          github.event.inputs.candidate_sdist_sha256 != '')
+        env:
+          CANDIDATE_SDIST_URL: ${{ github.event.inputs.candidate_sdist_url }}
+          CANDIDATE_SDIST_SHA256: ${{ github.event.inputs.candidate_sdist_sha256 }}
+        run: |
+          if [ -z "$CANDIDATE_SDIST_URL" ] || [ -z "$CANDIDATE_SDIST_SHA256" ]; then
+            echo "::error::candidate_sdist_url and candidate_sdist_sha256 must be provided together"
+            exit 1
+          fi
+
+          CANDIDATE_ARCHIVE="$RUNNER_TEMP/bobi-candidate.tar.gz"
+          curl -fsSL "$CANDIDATE_SDIST_URL" -o "$CANDIDATE_ARCHIVE"
+          ACTUAL_SHA256="$(shasum -a 256 "$CANDIDATE_ARCHIVE" | cut -d ' ' -f 1)"
+          EXPECTED_SHA256="$(printf '%s' "$CANDIDATE_SDIST_SHA256" | tr '[:upper:]' '[:lower:]')"
+          if [ "$ACTUAL_SHA256" != "$EXPECTED_SHA256" ]; then
+            echo "::error::candidate sdist SHA-256 mismatch"
+            exit 1
+          fi
+
+          python3 -m venv "$RUNNER_TEMP/formula-generator"
+          GENERATOR_PYTHON="$RUNNER_TEMP/formula-generator/bin/python"
+          "$GENERATOR_PYTHON" -m pip install "$CANDIDATE_ARCHIVE"
+          VERSION="$(
+            "$GENERATOR_PYTHON" -c \
+              'from importlib.metadata import version; print(version("bobi"))'
+          )"
+          "$GENERATOR_PYTHON" scripts/update-formula.py "$VERSION" \
+            --sdist-url "$CANDIDATE_SDIST_URL" \
+            --sdist-sha256 "$CANDIDATE_SDIST_SHA256" \
+            > Formula/bobi.rb
 
       - name: Set up Homebrew
         run: |
@@ -50,8 +122,42 @@ jobs:
             find ~/Library/Logs/Homebrew/"${FORMULA}"/ -type f -exec echo "--- {} ---" \; -exec cat {} \; 2>/dev/null
             exit 1
           }
+
+      - name: Test installed formula
+        run: |
+          FORMULA="${{ steps.formula.outputs.formula }}"
+          LOG_MARKER="$RUNNER_TEMP/bobi-formula-test-started"
+          touch "$LOG_MARKER"
+          if ! brew test --verbose --keep-tmp "moda-labs/bobi-agent/${FORMULA}"; then
+            echo "=== Homebrew formula test failed. Dumping event-server.log ==="
+            LOG_PATH="$(
+              find "${TMPDIR:-/tmp}" /private/tmp \
+                -path "*/state/event-server.log" -type f \
+                -newer "$LOG_MARKER" -print 2>/dev/null |
+                head -n 1
+            )"
+            if [ -n "$LOG_PATH" ]; then
+              cp "$LOG_PATH" "$RUNNER_TEMP/bobi-event-server.log"
+              cat "$RUNNER_TEMP/bobi-event-server.log"
+            else
+              echo "No event-server.log was produced."
+            fi
+            exit 1
+          fi
+
+      - name: Create bottle
+        run: |
+          FORMULA="${{ steps.formula.outputs.formula }}"
           brew bottle --no-rebuild --json "moda-labs/bobi-agent/${FORMULA}"
-          ls -la *.bottle.*
+          ls -la ./*.bottle.*
+
+      - name: Upload event-server failure log
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: event-server-log_${{ matrix.os }}
+          path: ${{ runner.temp }}/bobi-event-server.log
+          if-no-files-found: ignore
 
       - name: Upload bottle
         uses: actions/upload-artifact@v4
