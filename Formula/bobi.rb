@@ -3,17 +3,14 @@ class Bobi < Formula
 
   desc "Event-driven AI agent framework"
   homepage "https://github.com/moda-labs/bobi-agent"
-  url "https://files.pythonhosted.org/packages/9d/97/3d3fa597f0677fcead476cfc73dfb4684e5482c414c89b7051cd362326ef/bobi-0.48.0.tar.gz"
-  sha256 "5e4c575adb6890ec0d6cf183f952350c23087f32cd22c558d28a9f5cbd93dfcb"
+  url "https://files.pythonhosted.org/packages/db/ed/8989defdbdfa93386e9d3fcf0525f4e28a499e847aafb8584329657408f5/bobi-0.49.0.tar.gz"
+  version "0.49.0"
+  sha256 "031fc0c0ed1689ce1d45f1c49ef9712432048c0675985960299b327696f6ace7"
   license "MIT"
-  bottle do
-    root_url "https://github.com/moda-labs/homebrew-bobi-agent/releases/download/bobi-0.48.0"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "598fa3fc5b4ca85f3d467c80dff86b92a4adce541be47e90132b888aac6f8d09"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma: "713b602979c35d377e756650ea19cb32d2e9ab49929be49d188f1ff67da647ff"
-  end
 
   depends_on "maturin" => :build
   depends_on "rust" => :build
+  depends_on "node"
   depends_on "python@3.13"
 
   resource "annotated-doc" do
@@ -22,8 +19,8 @@ class Bobi < Formula
   end
 
   resource "annotated-types" do
-    url "https://files.pythonhosted.org/packages/ee/67/531ea369ba64dcff5ec9c3402f9f51bf748cec26dde048a2f973a4eea7f5/annotated_types-0.7.0.tar.gz"
-    sha256 "aff07c09a53a08bc8cfccb9c85b05f1aa9a2a6f23728d790723543408344ce89"
+    url "https://files.pythonhosted.org/packages/5f/56/a8120250d128bed162cd73c76d45f6ef9991f3e068f62a8ee060afa3104a/annotated_types-0.8.0.tar.gz"
+    sha256 "13b2beaad985e05e2d6407ee4c4f35590b11f8d693a258a561055cac8f64cab7"
   end
 
   resource "anyio" do
@@ -255,6 +252,106 @@ class Bobi < Formula
   end
 
   test do
-    assert_match "Usage", shell_output("#{bin}/bobi --help")
+    require "digest"
+    require "find"
+    require "json"
+    require "net/http"
+    require "pathname"
+    require "shellwords"
+
+    python = libexec/"bin/python"
+    site_packages = libexec/"lib/python3.13/site-packages/bobi"
+    runtime_root = testpath/"runtime"
+    npm_shim_dir = testpath/"npm-shim"
+    npm_trace = testpath/"npm-invoked"
+    runtime_root.mkpath
+    npm_shim_dir.mkpath
+
+    (npm_shim_dir/"npm").write <<~SH
+      #!/bin/sh
+      printf '%s\n' "$*" >> "$BOBI_HOMEBREW_NPM_TRACE"
+      exit 97
+    SH
+    (npm_shim_dir/"npm").chmod 0755
+
+    snapshot = lambda do
+      files = {}
+      Find.find(site_packages) do |entry|
+        path = Pathname(entry)
+        relative = path.relative_path_from(site_packages).to_s
+        digest = path.file? ? Digest::SHA256.file(path).hexdigest : nil
+        target = path.symlink? ? path.readlink.to_s : nil
+        files[relative] = [path.stat.mode, path.stat.size, digest, target]
+      end
+      files
+    end
+
+    smoke = testpath/"event-server-smoke.py"
+    smoke.write <<~PYTHON
+      import json
+      import sys
+      from pathlib import Path
+
+      from bobi.events.server import ensure_running
+
+      port = int(sys.argv[1])
+      runtime_root = Path(sys.argv[2])
+      status = ensure_running(
+          port,
+          bind="127.0.0.1",
+          project_path=runtime_root,
+      )
+      print(json.dumps({"status": status}))
+    PYTHON
+
+    ENV["BOBI_HOMEBREW_NPM_TRACE"] = npm_trace.to_s
+    ENV["PYTHONDONTWRITEBYTECODE"] = "1"
+    ENV.prepend_path "PATH", Formula["node"].opt_bin
+    ENV.prepend_path "PATH", npm_shim_dir
+
+    node_version = shell_output("#{Formula["node"].opt_bin}/node --version")
+    assert_operator node_version.delete_prefix("v").split(".").first.to_i, :>=, 20
+
+    before = snapshot.call
+    port = free_port
+    pid_file = runtime_root/"state/event-server.pid"
+    log_file = runtime_root/"state/event-server.log"
+
+    begin
+      command = [python, smoke, port.to_s, runtime_root].map do |argument|
+        Shellwords.escape(argument.to_s)
+      end.join(" ")
+      startup = JSON.parse(
+        shell_output(command),
+      )
+      assert_equal "started", startup.fetch("status")
+
+      health = JSON.parse(
+        Net::HTTP.get(URI("http://127.0.0.1:#{port}/health")),
+      )
+      assert_equal "ok", health.fetch("status")
+      assert_equal "local", health.fetch("mode")
+      refute_path_exists npm_trace
+      assert_equal before, snapshot.call
+    ensure
+      failure = $!
+      if pid_file.exist?
+        pid = pid_file.read.to_i
+        if pid.positive?
+          begin
+            Process.kill("TERM", -pid)
+            sleep 1
+            Process.kill(0, -pid)
+            Process.kill("KILL", -pid)
+          rescue Errno::ESRCH
+            # The embedded server exited after TERM.
+          end
+        end
+      end
+      if failure && log_file.exist?
+        $stderr.puts "=== event-server.log ==="
+        $stderr.puts log_file.read
+      end
+    end
   end
 end
