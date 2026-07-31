@@ -3,15 +3,10 @@ class Bobi < Formula
 
   desc "Event-driven AI agent framework"
   homepage "https://github.com/moda-labs/bobi-agent"
-  url "https://files.pythonhosted.org/packages/7e/6c/731217abdf1248d39e44915dcd67c000c219045ef10b9e829da3892bf872/bobi-0.51.0.tar.gz"
-  version "0.51.0"
-  sha256 "1dc553ceee7a87dcc01fad3218ff95d22029cad27a840201a48254bde803dee3"
+  url "https://files.pythonhosted.org/packages/7e/4a/9d49ae4d58eb1314716dc7a45972799a3cd184d566369169d5e720b849af/bobi-0.51.1.tar.gz"
+  version "0.51.1"
+  sha256 "8d1cc9cf7ec61dc6d2b0368d4a80e91dd257b381f643d633da81c71903a6b609"
   license "MIT"
-  bottle do
-    root_url "https://github.com/moda-labs/homebrew-bobi-agent/releases/download/bobi-0.51.0"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "86616d7ae93cc56136d597efd0bfbe675d94b850b51b0c386be698132f6abf1b"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma: "2be62dc3f99263ce5ac098abda0db28d125309edbe09742b269710e4def45907"
-  end
 
   depends_on "maturin" => :build
   depends_on "rust" => :build
