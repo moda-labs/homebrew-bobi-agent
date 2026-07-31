@@ -3,15 +3,10 @@ class Bobi < Formula
 
   desc "Event-driven AI agent framework"
   homepage "https://github.com/moda-labs/bobi-agent"
-  url "https://files.pythonhosted.org/packages/4e/f2/f364874068ee3cfe8942715f4cd4f78b0810016fb836dbc69ae6c625d839/bobi-0.50.0.tar.gz"
-  version "0.50.0"
-  sha256 "21384476018b28ded7eee507c62a91cedc925ac636b5e901b4f2ad75fb5b0bcb"
+  url "https://files.pythonhosted.org/packages/7e/6c/731217abdf1248d39e44915dcd67c000c219045ef10b9e829da3892bf872/bobi-0.51.0.tar.gz"
+  version "0.51.0"
+  sha256 "1dc553ceee7a87dcc01fad3218ff95d22029cad27a840201a48254bde803dee3"
   license "MIT"
-  bottle do
-    root_url "https://github.com/moda-labs/homebrew-bobi-agent/releases/download/bobi-0.50.0"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "86d8d63f9b2ec2f7e3cee8f6987297c999038811c22a6ff2c825658deb4e0121"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma: "9cc64f8280129f5e07e3df15cd28e82e689ffbb1ca1fa595cfa73e8afd4adffd"
-  end
 
   depends_on "maturin" => :build
   depends_on "rust" => :build
@@ -64,8 +59,8 @@ class Bobi < Formula
   end
 
   resource "cryptography" do
-    url "https://files.pythonhosted.org/packages/1f/99/d1c90d6041656cc6ee229dc99cd67fd0cd5aec3c5f7d72fffc27cc750054/cryptography-49.0.0.tar.gz"
-    sha256 "f89660a348f4f78a92366240a61404e337586ef7f5909a2fef59ca88ef505493"
+    url "https://files.pythonhosted.org/packages/de/41/6cbdcf9142d00fe82836fbb51e503e58088575cf7a0fe1dbff6695bf0840/cryptography-50.0.0.tar.gz"
+    sha256 "eeac2acb5a20ed25e0ad6d1df9891a520b78b404266b6d11778f25d5d691a6c9"
   end
 
   resource "fastapi" do
@@ -234,8 +229,8 @@ class Bobi < Formula
   end
 
   resource "websockets" do
-    url "https://files.pythonhosted.org/packages/da/ea/c0f7924f7ccf005d6ad1f829971762ae751727497d6db1977ba5a635314f/websockets-17.0.tar.gz"
-    sha256 "6bbe83c4ef52a7533d2d8c6a3512b93722fd0db6bc6bc638d45edd49ef201444"
+    url "https://files.pythonhosted.org/packages/f7/96/e01084f83a64bcb3a27994bd0cb0db68ff29d9c6707fae37ec19b18ba990/websockets-17.0.1.tar.gz"
+    sha256 "5baa9bc0dfbae8c507e51c8cf1b6d4628086f7a87bbd3a9952bd5f035451f1cc"
   end
 
   def install
