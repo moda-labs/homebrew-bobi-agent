@@ -3,15 +3,10 @@ class Bobi < Formula
 
   desc "Event-driven AI agent framework"
   homepage "https://github.com/moda-labs/bobi-agent"
-  url "https://files.pythonhosted.org/packages/7e/4a/9d49ae4d58eb1314716dc7a45972799a3cd184d566369169d5e720b849af/bobi-0.51.1.tar.gz"
-  version "0.51.1"
-  sha256 "8d1cc9cf7ec61dc6d2b0368d4a80e91dd257b381f643d633da81c71903a6b609"
+  url "https://files.pythonhosted.org/packages/48/26/66875d9fdb7fd683d81a93cfe953a0d5f2acea2ce1709c704fd153a1aad2/bobi-0.52.0.tar.gz"
+  version "0.52.0"
+  sha256 "3d71dfb928cccaac1d833af1bd8938e04dafb25e0c6febe1b726b8c2e3112744"
   license "MIT"
-  bottle do
-    root_url "https://github.com/moda-labs/homebrew-bobi-agent/releases/download/bobi-0.51.1"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "c54ab3e9e3c146fb209287b4a432c5325a7e16fe97ae0f14f8bfd7df4f39144a"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma: "e55c88034701fda097e3812ecf0d005288d05ee2501c4d7ce37403c35531c305"
-  end
 
   depends_on "maturin" => :build
   depends_on "rust" => :build
@@ -214,8 +209,8 @@ class Bobi < Formula
   end
 
   resource "uvicorn" do
-    url "https://files.pythonhosted.org/packages/05/c8/2d307868453a4bca6e64fa3581d122ae0748a0869c53f159339def179c7c/uvicorn-0.52.0.tar.gz"
-    sha256 "ca8876ad6c1983f394157c168b39d52f6dd56dabf5602fa0982751cffc2293ae"
+    url "https://files.pythonhosted.org/packages/03/18/ccce41535dee1be77735592bd19965f3972c82e07ee703d324709496b716/uvicorn-0.52.1.tar.gz"
+    sha256 "112ec661814189acbccd3f7b86460147cc065fc92c0821afa78918780e4354dd"
   end
 
   resource "uvloop" do
