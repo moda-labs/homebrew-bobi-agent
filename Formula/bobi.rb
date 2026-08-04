@@ -3,15 +3,10 @@ class Bobi < Formula
 
   desc "Event-driven AI agent framework"
   homepage "https://github.com/moda-labs/bobi-agent"
-  url "https://files.pythonhosted.org/packages/09/05/d1a5c940097c200e6b80cd31f63c80007bcc2f7f153a9b80b85642c31520/bobi-0.53.0.tar.gz"
-  version "0.53.0"
-  sha256 "2b9f1f419318a0c7d8f941ce13ab70cfbd97a024f9d76c8ec26a78e58eee65ec"
+  url "https://files.pythonhosted.org/packages/c7/05/96e203c937bedb807a803495651a852c37d34c0532f40356e9dacf1b3a0a/bobi-0.54.0.tar.gz"
+  version "0.54.0"
+  sha256 "e9007e2dd3bf4fc905067a75b2dec8c2382f14576834a53bd0bdf5a2f058d0aa"
   license "MIT"
-  bottle do
-    root_url "https://github.com/moda-labs/homebrew-bobi-agent/releases/download/bobi-0.53.0"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "bd1fa99afa8610c39fed37ef4319e0f5b2251678c03ee31c17047d610bd535bc"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma: "4564561b14854ee9868abf3b528e3b7a6087d140b58773cf65b954aa92bef163"
-  end
 
   depends_on "maturin" => :build
   depends_on "rust" => :build
@@ -54,8 +49,8 @@ class Bobi < Formula
   end
 
   resource "claude-agent-sdk" do
-    url "https://files.pythonhosted.org/packages/a7/e8/3a9622b31f9ee22274e13a620e5e75ac38454d14538391b2fe3bc7eb76dc/claude_agent_sdk-0.2.128.tar.gz"
-    sha256 "2ac7b2b3bc56ae9037fd284c8690d3dafab9493ecd28d8974bba79a418e1b800"
+    url "https://files.pythonhosted.org/packages/3b/ab/b2144806f4210582a0135734bb5f8ce40fd3ff2e867598b0f3234cc6f865/claude_agent_sdk-0.2.129.tar.gz"
+    sha256 "bf2ac3e5f8367a3f5edfb62f74a19ccd0bcd6277c555c8359dd9aa98f7abcf4f"
   end
 
   resource "click" do
