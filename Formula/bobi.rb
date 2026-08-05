@@ -3,15 +3,10 @@ class Bobi < Formula
 
   desc "Event-driven AI agent framework"
   homepage "https://github.com/moda-labs/bobi-agent"
-  url "https://files.pythonhosted.org/packages/a9/34/87d06e354d57a8fc18919a9e7141d61ee555aa6cfa58652f40b06cf4db05/bobi-0.55.0.tar.gz"
-  version "0.55.0"
-  sha256 "f9edf36ce45c15fcf67ac367fe2818debd1a39fcb5cd932bf701f765cbf8ee3f"
+  url "https://files.pythonhosted.org/packages/c1/ca/958624f3647053dba6ccd62bc02eac319e09b03c990932cfae59591125ac/bobi-0.56.0.tar.gz"
+  version "0.56.0"
+  sha256 "8aceaf9e3de534549f95175673a1a34adc8787f8a518e2518fded3dd5074617e"
   license "MIT"
-  bottle do
-    root_url "https://github.com/moda-labs/homebrew-bobi-agent/releases/download/bobi-0.55.0"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "8490cc0f06778e581a1bd9465686d51c7b3b9523a872ee49f22203cfa9b32c85"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma: "b1b176af8d769810bd05f5f42aeb291e60939756a36c72ea64615b3947183664"
-  end
 
   depends_on "maturin" => :build
   depends_on "rust" => :build
@@ -189,13 +184,13 @@ class Bobi < Formula
   end
 
   resource "sse-starlette" do
-    url "https://files.pythonhosted.org/packages/6c/10/a34c656829ffc1c4b22ef36d70d9ebb6b99c020e2aeb17cee5485099f028/sse_starlette-3.4.6.tar.gz"
-    sha256 "725f8a1bd6d26ae1b2c9610c0ef5065dfdd496f3988d28adcf8c4b49dc25c627"
+    url "https://files.pythonhosted.org/packages/f8/00/b42a44342a054d58cb1115d7c8aa9cb4290dd9442f9c1b91a4b8173dba22/sse_starlette-3.4.8.tar.gz"
+    sha256 "ed89ffbb75cbf78a5fe2f2109cd584792ee7f9dfac96f791db546df8f15f3f9c"
   end
 
   resource "starlette" do
-    url "https://files.pythonhosted.org/packages/eb/e3/7c1dc7381d9f8ab7d854328ebfa884e62cb3f3d8549ddfd37c7814f42afa/starlette-1.3.1.tar.gz"
-    sha256 "05d0213193f2fbaae60e2ecb593b4add4262ad4e46536b54abe36f11a71724e0"
+    url "https://files.pythonhosted.org/packages/0f/3c/76d2fd1f1357ed0f0108d8a5aa233dcf16e2946a8559c84912fe08e01ac7/starlette-1.4.1.tar.gz"
+    sha256 "b7332de6e9375593a29ba9eee1e6ecfeb3eb2043e2e19a13b4b71da73ff35540"
   end
 
   resource "truststore" do
