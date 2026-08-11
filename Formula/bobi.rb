@@ -3,15 +3,10 @@ class Bobi < Formula
 
   desc "Event-driven AI agent framework"
   homepage "https://github.com/moda-labs/bobi-agent"
-  url "https://files.pythonhosted.org/packages/c1/ca/958624f3647053dba6ccd62bc02eac319e09b03c990932cfae59591125ac/bobi-0.56.0.tar.gz"
-  version "0.56.0"
-  sha256 "8aceaf9e3de534549f95175673a1a34adc8787f8a518e2518fded3dd5074617e"
+  url "https://files.pythonhosted.org/packages/9b/62/901291476f61733403cde547f09b616065d17566350af8cf69de845aac10/bobi-0.57.0.tar.gz"
+  version "0.57.0"
+  sha256 "9efa10d0163d0e2739af306fa92969166db88546100f4b7ca5d4bb37936174bb"
   license "MIT"
-  bottle do
-    root_url "https://github.com/moda-labs/homebrew-bobi-agent/releases/download/bobi-0.56.0"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "2301c9ba64127deeed3b015122ea3013edd258251d8bc78f3f1b677a9885ecbc"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma: "67e376b4c98346d2f389d04023ef11bb96ddafc47f02f7fd9058eb07bbca640a"
-  end
 
   depends_on "maturin" => :build
   depends_on "rust" => :build
@@ -54,8 +49,8 @@ class Bobi < Formula
   end
 
   resource "claude-agent-sdk" do
-    url "https://files.pythonhosted.org/packages/19/aa/25cda3ddcff22a5097571be871e00cd9c4dca1326e16910c401998fbc258/claude_agent_sdk-0.2.130.tar.gz"
-    sha256 "4db7b937bb4e411ac1c9cdd7a7089043836d0a4ad80f8244e8a8413c399beb1e"
+    url "https://files.pythonhosted.org/packages/d8/ae/27d0276f745bf18aa73ef6c4fe5a9ad496bb822140e30fbdb97d8d86d635/claude_agent_sdk-0.2.135.tar.gz"
+    sha256 "471ae3769d7814c658fa0a37dbd95bb4b1e365563d6a794dcdd99586a29ec53b"
   end
 
   resource "click" do
@@ -128,6 +123,16 @@ class Bobi < Formula
     sha256 "52d01f334de1868cc3bb2d6604931126a67631f99a6c5d3b82ba47290315ec36"
   end
 
+  resource "opentelemetry-proto" do
+    url "https://files.pythonhosted.org/packages/64/01/40ac4ae9a149263cc52c2cee200ddd80cb6d8db1a4610abf8eabce0fe771/opentelemetry_proto-1.44.0.tar.gz"
+    sha256 "c547a79c2f8c0c515d31509154682e5921c7cfd5ca67b70e1f9266e2c3e103f3"
+  end
+
+  resource "protobuf" do
+    url "https://files.pythonhosted.org/packages/da/01/9ef0afd7999eb9badb3a768b4aedd78c86d4c65cfaf1958ab276199e76b4/protobuf-7.35.1.tar.gz"
+    sha256 "ce115a26fe0c39a2c29973d914d327e516a6455464489fe3cd1e51a1b354f81a"
+  end
+
   resource "pycparser" do
     url "https://files.pythonhosted.org/packages/1b/7d/92392ff7815c21062bea51aa7b87d45576f649f16458d78b7cf94b9ab2e6/pycparser-3.0.tar.gz"
     sha256 "600f49d217304a5902ac3c37e1281c9fe94e4d0489de643a9504c5cdfdfc6b29"
@@ -139,8 +144,8 @@ class Bobi < Formula
   end
 
   resource "pydantic-settings" do
-    url "https://files.pythonhosted.org/packages/5c/b5/8f48e906c3e0205276e8bd8cb7512217a87b2685304d64be27cad5b3019f/pydantic_settings-2.14.2.tar.gz"
-    sha256 "c19dd64b19097f1de80184f0cc7b0272a13ae6e170cbf240a3e27e381ed14a5f"
+    url "https://files.pythonhosted.org/packages/68/ca/31c57507b13119d7d3cfa1576dad2911a4861e3be07b579395f4e9d393f9/pydantic_settings-2.15.0.tar.gz"
+    sha256 "694b793e84f766ba76a90ebdefc01d0a9a045dab0382bee70393da93712ad117"
   end
 
   resource "pydantic_core" do
@@ -179,8 +184,8 @@ class Bobi < Formula
   end
 
   resource "setuptools" do
-    url "https://files.pythonhosted.org/packages/34/26/f5d29e25ffdb535afef2d35cdb55b325298f96debd670da4c325e08d70f4/setuptools-83.0.0.tar.gz"
-    sha256 "025bccbbf0fa05b6192bc64ae1e7b16e001fd6d6d4d5de03c97b1c1ade523bef"
+    url "https://files.pythonhosted.org/packages/6d/44/f5da03a8ef95d369145c5bb53050e7877c9f3d312e128605fd9504829143/setuptools-84.0.0.tar.gz"
+    sha256 "f4695c21257f0d9b537ec2692c941d02ee143b7cc1276941349a546573b2ef73"
   end
 
   resource "sniffio" do
@@ -194,8 +199,8 @@ class Bobi < Formula
   end
 
   resource "starlette" do
-    url "https://files.pythonhosted.org/packages/0f/3c/76d2fd1f1357ed0f0108d8a5aa233dcf16e2946a8559c84912fe08e01ac7/starlette-1.4.1.tar.gz"
-    sha256 "b7332de6e9375593a29ba9eee1e6ecfeb3eb2043e2e19a13b4b71da73ff35540"
+    url "https://files.pythonhosted.org/packages/b5/b4/205b0d5241d934e8add0c38aa924c4f9fb7330834ff11e5444db964ec3f9/starlette-1.6.0.tar.gz"
+    sha256 "d4e3ac5e546444960c710297a3c9fc3f7ebae1b7e963f3d36173b49da535be9b"
   end
 
   resource "truststore" do
@@ -204,8 +209,8 @@ class Bobi < Formula
   end
 
   resource "typing-inspection" do
-    url "https://files.pythonhosted.org/packages/55/e3/70399cb7dd41c10ac53367ae42139cf4b1ca5f36bb3dc6c9d33acdb43655/typing_inspection-0.4.2.tar.gz"
-    sha256 "ba561c48a67c5958007083d386c3295464928b01faa735ab8547c5692e87f464"
+    url "https://files.pythonhosted.org/packages/6d/bc/4eae18cd40c65798a16267572ba346c11f599d44b01603dbd843342042bc/typing_inspection-0.4.3.tar.gz"
+    sha256 "c5f9ec1530b5c1e2c9bc34a84d9a3466ed1b2f3f2fa9f901368d9c5596210e4d"
   end
 
   resource "typing_extensions" do
