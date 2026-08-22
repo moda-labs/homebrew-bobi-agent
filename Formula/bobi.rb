@@ -3,15 +3,10 @@ class Bobi < Formula
 
   desc "Event-driven AI agent framework"
   homepage "https://github.com/moda-labs/bobi-agent"
-  url "https://files.pythonhosted.org/packages/9b/62/901291476f61733403cde547f09b616065d17566350af8cf69de845aac10/bobi-0.57.0.tar.gz"
-  version "0.57.0"
-  sha256 "9efa10d0163d0e2739af306fa92969166db88546100f4b7ca5d4bb37936174bb"
+  url "https://files.pythonhosted.org/packages/5b/55/fa187ce3efaa9172d9c2d710da5fc9133c2b6a1efd1f94c3e302de996b10/bobi-0.58.0.tar.gz"
+  version "0.58.0"
+  sha256 "e61b3b73c5dbb6a4d4425be652da2085c3ff483433c136642a1b743808bb3c8d"
   license "MIT"
-  bottle do
-    root_url "https://github.com/moda-labs/homebrew-bobi-agent/releases/download/bobi-0.57.0"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "9934863c97e0239313a6b5875485c8e76887ddf29ff2832b3e3327d94eee068a"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma: "2acf01522d60a07df789e5c9038fda4c1d9ddc42dc1a4e6fe1e59cc5653b320e"
-  end
 
   depends_on "maturin" => :build
   depends_on "rust" => :build
@@ -54,8 +49,8 @@ class Bobi < Formula
   end
 
   resource "claude-agent-sdk" do
-    url "https://files.pythonhosted.org/packages/d8/ae/27d0276f745bf18aa73ef6c4fe5a9ad496bb822140e30fbdb97d8d86d635/claude_agent_sdk-0.2.135.tar.gz"
-    sha256 "471ae3769d7814c658fa0a37dbd95bb4b1e365563d6a794dcdd99586a29ec53b"
+    url "https://files.pythonhosted.org/packages/73/e0/00d873adf589a4ba7899bc7e6ab5306fa55c8e9f4a2313a6f5fef95a473b/claude_agent_sdk-0.2.144.tar.gz"
+    sha256 "bf3df9930024bb7cf963313321af59b9ad7b6a13ec28bea6b864f457cff9afbc"
   end
 
   resource "click" do
@@ -99,8 +94,8 @@ class Bobi < Formula
   end
 
   resource "idna" do
-    url "https://files.pythonhosted.org/packages/cd/63/9496c57188a2ee585e0f1db071d75089a11e98aa86eb99d9d7618fc1edce/idna-3.18.tar.gz"
-    sha256 "ffb385a7e039654cef1ab9ef32c6fafe283c0c0467bba1d9029738ce4a14a848"
+    url "https://files.pythonhosted.org/packages/5f/f7/abb373e5757eaec4b922b92f97ec8d6d7e057cf06778247604fbc4e7c3f3/idna-3.19.tar.gz"
+    sha256 "5e0811a4383b21dc5838069f801c4fb62113b7447663d2530d2bd6e77b49bf15"
   end
 
   resource "jinja2" do
@@ -134,8 +129,8 @@ class Bobi < Formula
   end
 
   resource "protobuf" do
-    url "https://files.pythonhosted.org/packages/da/01/9ef0afd7999eb9badb3a768b4aedd78c86d4c65cfaf1958ab276199e76b4/protobuf-7.35.1.tar.gz"
-    sha256 "ce115a26fe0c39a2c29973d914d327e516a6455464489fe3cd1e51a1b354f81a"
+    url "https://files.pythonhosted.org/packages/a7/e7/0553e21d25ca4d9f573135775348a372c3ec34a93a71d5f297c3bac38341/protobuf-7.36.0.tar.gz"
+    sha256 "e8e09cb0d794c6687926fa558a8a6e72aa10edb997d5ca61da0765f12a3e00ea"
   end
 
   resource "pycparser" do
@@ -164,8 +159,8 @@ class Bobi < Formula
   end
 
   resource "python-dotenv" do
-    url "https://files.pythonhosted.org/packages/82/ed/0301aeeac3e5353ef3d94b6ec08bbcabd04a72018415dcb29e588514bba8/python_dotenv-1.2.2.tar.gz"
-    sha256 "2c371a91fbd7ba082c2c1dc1f8bf89ca22564a087c2c287cd9b662adde799cf3"
+    url "https://files.pythonhosted.org/packages/6a/53/ed9d74092561d4b01a2ef1349d52cdbc135e526c245f366b089cfca6de49/python_dotenv-1.2.3.tar.gz"
+    sha256 "a20a594dabeaa385725aa239d5244871c143ecb356add8a20fcf23773a6c3a35"
   end
 
   resource "python-multipart" do
@@ -214,8 +209,8 @@ class Bobi < Formula
   end
 
   resource "typing-inspection" do
-    url "https://files.pythonhosted.org/packages/6d/bc/4eae18cd40c65798a16267572ba346c11f599d44b01603dbd843342042bc/typing_inspection-0.4.3.tar.gz"
-    sha256 "c5f9ec1530b5c1e2c9bc34a84d9a3466ed1b2f3f2fa9f901368d9c5596210e4d"
+    url "https://files.pythonhosted.org/packages/a3/26/b09b8010994eccc3c09092e6b34058f36a460eea2d4c3e8b910c695975a0/typing_inspection-0.4.4.tar.gz"
+    sha256 "547274fa6b0a561ccf549cc9524b999a578e737d015d8709d021f9d0d13bea47"
   end
 
   resource "typing_extensions" do
@@ -224,8 +219,8 @@ class Bobi < Formula
   end
 
   resource "uvicorn" do
-    url "https://files.pythonhosted.org/packages/03/18/ccce41535dee1be77735592bd19965f3972c82e07ee703d324709496b716/uvicorn-0.52.1.tar.gz"
-    sha256 "112ec661814189acbccd3f7b86460147cc065fc92c0821afa78918780e4354dd"
+    url "https://files.pythonhosted.org/packages/f2/0f/3f86e61397dd33bf2ccf28188c40db6a740658aeebbbf6e7dbc101a1f487/uvicorn-0.52.4.tar.gz"
+    sha256 "73acfee47a0b133c5de13d219492d62d8a31e935f4fe6e41a232451a15379f86"
   end
 
   resource "uvloop" do
