@@ -7,6 +7,11 @@ class Bobi < Formula
   version "0.60.0"
   sha256 "22564ba8707626fa78325a51e38531e40b5e1800214d6a36a0a3f9d74270fd6d"
   license "MIT"
+  bottle do
+    root_url "https://github.com/moda-labs/homebrew-bobi-agent/releases/download/bobi-0.60.0"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "e5595b0db2ea2a848011953db76d7135e218b7ac8aca02f710787911a86dd3cd"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma: "ae24ef3d2f9c9c7b1cd67cb83f0da831b5c857ccd01a36e871fbbab5022bf981"
+  end
 
   depends_on "maturin" => :build
   depends_on "rust" => :build
