@@ -3,15 +3,10 @@ class Bobi < Formula
 
   desc "Event-driven AI agent framework"
   homepage "https://github.com/moda-labs/bobi-agent"
-  url "https://files.pythonhosted.org/packages/75/09/a81893a6a4ea5a79e7d29276880f5972069d96ca6cb542a167a9c4e0503c/bobi-0.62.0.tar.gz"
-  version "0.62.0"
-  sha256 "801c185f5b014d2620707882c4fba2a974c33bf6d83fcff35349ca45a964da19"
+  url "https://files.pythonhosted.org/packages/fe/1d/4ce9725408716d28d0da645b55acd5cb773f2253c2ab1dd6dc191dd242e0/bobi-0.62.1.tar.gz"
+  version "0.62.1"
+  sha256 "215f58a7ca4e46daf17f9dec0c6c19cb503d8af498bc7807c52c28b10f0975e0"
   license "MIT"
-  bottle do
-    root_url "https://github.com/moda-labs/homebrew-bobi-agent/releases/download/bobi-0.62.0"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "bece7281796043ba120ec4505a7dea404f2ea1434e7c18668e072b92604e88f6"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma: "f5f2e5f1c2fefc499badc41a563de51fa82a7d8420197c1d689f697197e1d486"
-  end
 
   depends_on "maturin" => :build
   depends_on "rust" => :build
@@ -54,8 +49,8 @@ class Bobi < Formula
   end
 
   resource "claude-agent-sdk" do
-    url "https://files.pythonhosted.org/packages/74/94/382ca423a52365adb435fcdd129c0e58933177b26142a07ac11743518433/claude_agent_sdk-0.2.176.tar.gz"
-    sha256 "4793044584fc741bd1ab3a7d8751398f58edab8c89df5db1fc9ab58e66fd9068"
+    url "https://files.pythonhosted.org/packages/bb/96/029c76e62b48c7eef3982873f6882d8e5f94a8eaa293392a91229cc0b87e/claude_agent_sdk-0.2.178.tar.gz"
+    sha256 "b59aca6ba61d43a6d78f0ad03a2230485a26a73d7f5e7b60e9d5e8a70cdba8f2"
   end
 
   resource "click" do
@@ -219,8 +214,8 @@ class Bobi < Formula
   end
 
   resource "typing-inspection" do
-    url "https://files.pythonhosted.org/packages/a3/26/b09b8010994eccc3c09092e6b34058f36a460eea2d4c3e8b910c695975a0/typing_inspection-0.4.4.tar.gz"
-    sha256 "547274fa6b0a561ccf549cc9524b999a578e737d015d8709d021f9d0d13bea47"
+    url "https://files.pythonhosted.org/packages/ff/50/0195198eb1d75bab716bb0a813abea4cc394bfa17a92a189f021a34859af/typing_inspection-0.4.5.tar.gz"
+    sha256 "7f16c411e7930dc79596d42ab44672a3fe5f60eb34b781a1647e7872363120c7"
   end
 
   resource "typing_extensions" do
